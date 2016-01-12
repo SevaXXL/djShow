@@ -82,21 +82,9 @@ var djShow = function(container, options) {
 	 */
 	var except = function(haystack) {
 		var needle = [
-<<<<<<< Updated upstream
-				'missing value'
-=======
-<<<<<<< HEAD
-<<<<<<< HEAD
 				'\\?',
 				'missing value',
 				'N\\/A'
-=======
-				'missing value'
->>>>>>> origin/master
-=======
-				'missing value'
->>>>>>> origin/master
->>>>>>> Stashed changes
 			];
 		var regmatch = new RegExp('^(' + needle.join('|') + ')$', 'i');
 		return regmatch.test(haystack);
