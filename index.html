@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="ru">
+	<head>
+		<meta charset="utf-8">
+		<title>djShow</title>
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta name="description" content="Отображение на различных устройствах названия и артиста исполняемого трека">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-touch-fullscreen" content="yes">
+		<style>
+			html {
+				height: 100%;
+				min-height: 100%;
+			}
+			body {
+				margin: 0;
+				padding: 0;
+				min-height: 100%;
+				background-image: url(background.jpg);
+				background-attachment: fixed;
+				-webkit-background-size: cover;
+				   -moz-background-size: cover;
+					 -o-background-size: cover;
+						background-size: cover;
+				color: #fee;
+				text-align: center;
+				font-size: 32pt;
+			}
+			h1 {
+				margin: 0;
+				font-size: 3em;
+				line-height: 1em;
+			}
+			h2 {
+				margin: 0;
+				padding-top: 0.83em;
+				font-size: 2em;
+			}
+			h3 {
+				margin: 0;
+				font-size: 2em;
+				font-weight: normal;
+				font-style: italic;
+			}
+			p {
+				margin: 0;
+				padding: 1.2em 0 .3em;
+			}
+			.previous {
+				padding-top: 2em;
+			}
+			#container {
+				margin: 0 16px;
+				-webkit-transition: opacity 3s ease;
+				   -moz-transition: opacity 3s ease;
+					 -o-transition: opacity 3s ease;
+						transition: opacity 3s ease;
+			}
+			@media (max-width: 958px) {
+				body {
+					font-size: 18pt;
+				}
+			}
+			@media (max-width: 598px) {
+				body {
+					font-size: 14pt;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container"></div>
+		<script src="djshow.js"></script>
+		<script>
+			djShow('container');
+		</script>
+	</body>
+</html>
