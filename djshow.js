@@ -19,7 +19,7 @@
 
 
 /** 
- * djShow v2.2.0
+ * djShow v2.2.1
  *
  * @param string container - идентификатор блока-контейнера
  * @param object options - дополнительные параметры
@@ -39,7 +39,7 @@ var djShow = function(container, options) {
 		preload = options.preload || [];
 
 	/**
-	 * Предзагрузка изображений
+	 * Предзагрузка изображений, выполняется перед window.onload
 	 */
 	if (preload.length) {
 		var img = [];
@@ -77,17 +77,20 @@ var djShow = function(container, options) {
 	};
 
 	/**
-	 * Поиск исключений в названиях
-	 * @param string haystack - строка, в которой осуществляется поиск
+	 * Поиск исключений
+	 * @param string text - строка для сравнения
+	 * return integer || undefined
 	 */
-	var except = function(haystack) {
-		var needle = [
-				'\\?',
+	var except = function(text) {
+		// Все строчными
+		var exclude = [
+				'?',
 				'missing value',
-				'N\\/A'
+				'n/a'
 			];
-		var regmatch = new RegExp('^(' + needle.join('|') + ')$', 'i');
-		return regmatch.test(haystack);
+		if (Array.prototype.indexOf) {
+			return exclude.indexOf(text.toLowerCase()) + 1;
+		}
 	};
 
 	/**
@@ -121,10 +124,10 @@ var djShow = function(container, options) {
 		}
 
 		var previous_title = getName('title', data.previous);
-		if (previous_title) {
+		if (previous_title && !except(previous_title)) {
 			html += '<p class="previous">Предыдущая: “' + previous_title + '”';
 			var previous_artist = getName('artist', data.previous);
-			if (previous_artist) {
+			if (previous_artist && !except(previous_artist)) {
 				previous_artist = previous_artist.split(' - ');
 				html += ' ' + previous_artist[0];
 			}

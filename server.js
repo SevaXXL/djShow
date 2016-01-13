@@ -17,7 +17,7 @@
  *  along with djShow. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var version  = '2.2.0',
+var version  = '2.2.1',
 	datafile = __dirname + '/' + 'NowPlaying.txt';
 
 var http  = require('http'),
