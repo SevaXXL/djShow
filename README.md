@@ -23,8 +23,8 @@
 - Для Foobar2000 - плагин Now Playing Simple - http://skipyrich.com/wiki/Foobar2000:Now_Playing_Simple
 
 Под Mac:
-- Для iTunes и Swinsian - скрипты NowPlaying[...].app, приложены в папке additional. Для других поригрывателей под Mac можно написать аналогичные скрипты самостоятельно (смотрите код).
-- В Djay файл NowPlaying.txt создается автоматически и лежит в папке /Users/%username%/Music/djay
+- Для iTunes, Swinsian и VOX - скрипты NowPlaying[...].app, приложены в папке additional. Для других поригрывателей под Mac можно написать аналогичные скрипты самостоятельно (смотрите код).
+- В плейере Djay файл NowPlaying.txt создается автоматически и лежит в папке /Users/%username%/Music/djay
 
 **Шаг 2. Включаем мини-сервер**
 
