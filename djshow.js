@@ -39,7 +39,7 @@ var djShow = function(container, options) {
 		preload = options.preload || [];
 
 	/**
-	 * Предзагрузка изображений, выполняется перед window.onload
+	 * Предзагрузка изображений
 	 */
 	if (preload.length) {
 		var img = [];
