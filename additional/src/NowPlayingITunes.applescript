@@ -1,18 +1,20 @@
 (*
- *  Copyright (C) 2016 Aleksandr Deinega <adeinega@mail.ru>
+ *  Copyright (C) 2015-2016 Aleksandr Deinega <adeinega@mail.ru>
  *
- *  This program is free software: you can redistribute it and/or modify
+ *  This file is part of djShow.
+ *
+ *  djShow is free software: you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation, either version 3 of the License, or
  *  (at your option) any later version.
  *
- *  This program is distributed in the hope that it will be useful,
+ *  djShow is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the
  *  GNU General Public License for more details.
  *
  *  You should have received a copy of the GNU General Public License
- *  along with this program. If not, see <http://www.gnu.org/licenses/>.
+ *  along with djShow. If not, see <http://www.gnu.org/licenses/>.
  *)
 
 global previous
@@ -70,7 +72,7 @@ on writeToFile(trackData)
 		set filepath to filepath as string
 		set openfile to open for access filepath with write permission
 		set eof of the openfile to 0
-		write trackData to openfile as Â«class utf8Â» starting at eof
+		write trackData to openfile as Çclass utf8È starting at eof
 		close access openfile
 		return true
 	on error
