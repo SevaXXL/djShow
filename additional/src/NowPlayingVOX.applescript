@@ -53,7 +53,7 @@ on getData()
 				if player state is 1 then
 					set trackTitle to track
 					set trackArtist to artist
-					set trackData to "<title>" & trackTitle & "</title><artist>" & trackArtist &  "</artist>"
+					set trackData to "<title>" & trackTitle & "</title><artist>" & trackArtist & "</artist>"
 				end if
 			end tell
 		end if
