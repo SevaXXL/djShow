@@ -71,7 +71,7 @@ on writeToFile(trackData)
 	try
 		set openfile to open for access filepath with write permission
 		set eof of openfile to 0
-		write trackData to openfile as Çclass utf8È starting at eof
+		write trackData to openfile as Â«class utf8Â» starting at eof
 		close access openfile
 		return true
 	on error
