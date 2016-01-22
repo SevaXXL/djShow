@@ -1,6 +1,7 @@
 # djShow (v2.2.2)
 
-С помощью программы djShow танго-диджей на милонге может транслировать название и исполнителя композиции на различные устройства: мониторы, планшеты, телефоны. Программа работает под Windows, Mac и Linux, имеет пользовательские настройки и полностью автоматизирована.
+С помощью программы djShow танго-диджей на милонге может транслировать название и исполнителя композиции на различные устройства: мониторы, планшеты, телефоны. Программа работает под Windows, Mac и Linux, имеет пользовательские настройки, полностью автоматизирована и практически не создает нагрузки на процессор.
+
 
 ## Принцип работы
 
@@ -9,31 +10,23 @@
 
 ## Пошаговая инструкция
 
-**Шаг 1. Готовим экспорт данных**
-
-Один из способов - файл NowPlaying.txt - обновляется музыкальным проигрывателем при смене исполняемой композиции. Файл должен быть в кодировке UTF-8 и содержать следующую информацию:
-
-    <title>...</title><artist>...</artist>
-или
-
-    Title: ...
-    Artist: ...
+**Шаг 1. Готовим экспорт данных из плейера**
 
 Протестированные решения под Windows:
-- Для Aimp необходим плагин Current track info to file - http://www.aimp.ru/index.php?do=catalog&rec_id=358
-- Для Foobar2000 - плагин Now Playing Simple - http://skipyrich.com/wiki/Foobar2000:Now_Playing_Simple
-- Для iTunes, Winamp, Windows Media Player также есть плагтны - уточните у автора.
+- Для Aimp необходим плагин Current track info to file. Инструкция: https://github.com/SevaXXL/djShow/wiki/Export-from-Aimp-Windows
+- Для Foobar2000 - плагин Now Playing Simple. Инструкция: https://github.com/SevaXXL/djShow/wiki/Export-from-Foobar2000-Windows
+- Для iTunes, Winamp, Windows Media Player также есть плагины - уточните в группе.
 
 Под Mac:
 - Для iTunes, Swinsian и VOX - скрипты NowPlaying[...].app, приложены в папке additional. Для других поригрывателей под Mac можно написать аналогичные скрипты самостоятельно (смотрите код).
 - В плейере Djay файл NowPlaying.txt создается автоматически и лежит в папке /Users/%username%/Music/djay
 
 Под Linux
-- Для Clementine скрипт на python - свяжитесь с автором.
+- Для Clementine скрипт на python - уточните в группе.
 
 **Шаг 2. Включаем мини-сервер**
 
-Для этого необходима программа NodeJS, которую устанавливаем с официального сайта http://nodejs.org. Запускаем скрипт `server.js`:
+Для этого необходима программа NodeJS, которую устанавливаем с официального сайта http://nodejs.org. С помощью NodeJS запускаем скрипт `server.js`:
 - Windows - создаем файл start.bat с содержимым: `"C:\Program Files\nodejs\node.exe" server.js`
 - Mac и Linux - `$ sudo node  путь_к_скрипту/server.js`.
 
@@ -43,9 +36,10 @@
 
 Включаем wifi-роутер. С любого устройства в сети переходим по адресу: http://IP-компьютера.
 
+
 ## Контакты
 
-Если есть вопросы, пожалуйста, обращайтесь по email: adeinega@mail.ru или https://www.facebook.com/adeinega Группа проекта djShow на Facebook - https://www.facebook.com/groups/448365622022494/
+Если есть вопросы, пожалуйста, обращайтесь по email: adeinega@mail.ru. Группа проекта djShow на Facebook - https://www.facebook.com/groups/448365622022494/
 
 
 ## Версии
