@@ -19,7 +19,7 @@
 
 
 /** 
- * djShow v2.2.1
+ * djShow v2.2.2
  *
  * @param string container - идентификатор блока-контейнера
  * @param object options - дополнительные параметры
@@ -86,7 +86,8 @@ var djShow = function(container, options) {
 		var exclude = [
 				'?',
 				'missing value',
-				'n/a'
+				'n/a',
+				'various artists'
 			];
 		if (Array.prototype.indexOf) {
 			return exclude.indexOf(text.toLowerCase()) + 1;
@@ -101,10 +102,12 @@ var djShow = function(container, options) {
 
 		var data = JSON.parse(event.data);
 		var html = '';
+
 		if (container.innerHTML !== '') {
 			container.style.opacity = '0';
-			var sunsend = sunset(data);
 		}
+
+		var sunsend = sunset(data);
 
 		var current_title = getName('title', data.current);
 		if (current_title && !except(current_title)) {
@@ -114,18 +117,16 @@ var djShow = function(container, options) {
 		var current_artist = getName('artist', data.current);
 		if (current_artist && !except(current_artist)) {
 			current_artist = current_artist.split(' - ');
-			if (current_artist[0]) {
-				html += '<p>Исполнитель:</p>';
-				html += '<h1>' + current_artist[0] + '</h1>';
-				if (current_artist[1]) {
-					html += '<h3>(' + current_artist[1].trim() + ')</h3>';
-				}
+			html += '<p>Исполнитель:</p>';
+			html += '<h1>' + current_artist[0] + '</h1>';
+			if (current_artist[1]) {
+				html += '<h3>(' + current_artist[1].trim() + ')</h3>';
 			}
 		}
 
 		var previous_title = getName('title', data.previous);
 		if (previous_title && !except(previous_title)) {
-			html += '<p class="previous">Предыдущая: “' + previous_title + '”';
+			html += '<p class="previous">Предыдущая: &ldquo;' + previous_title + '&rdquo;';
 			var previous_artist = getName('artist', data.previous);
 			if (previous_artist && !except(previous_artist)) {
 				previous_artist = previous_artist.split(' - ');
@@ -142,6 +143,7 @@ var djShow = function(container, options) {
 			}, latency);
 		} else {
 			container.innerHTML = html;
+			sunrise(sunsend);
 		}
 	};
 

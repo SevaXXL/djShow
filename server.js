@@ -17,7 +17,7 @@
  *  along with djShow. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var version  = '2.2.1',
+var version  = '2.2.2',
 	datafile = __dirname + '/' + 'NowPlaying.txt';
 
 var http  = require('http'),
@@ -27,36 +27,77 @@ var http  = require('http'),
 	net   = require('os').networkInterfaces(),
 	users = [],
 	data  = {
-		current: getData()
+		current: getDatafile()
 	};
 
+/**
+ * Основной сервер
+ */
 http.createServer(function(request, response) {
-	request.addListener('end', function() {
-		if (request.url === '/event') {
+	request.on('end', function() {
+		if ('/event' === request.url) {
 			sendSSE(request, response);
 		} else {
-			if (request.url === '/') request.url = '/index.html';
+			if ('/' === request.url) request.url = '/index.html';
 			sendFile(request, response);
 		}
 	}).resume();
-}).listen(80);
-
-console.log('*** djShow *** running at http://' + (getIP() || '127.0.0.1'));
-console.log('Ctrl+C to exit...');
+}).listen(80, function() {
+	console.log('*** djShow *** running at http://' + (getIP() || '127.0.0.1'));
+	console.log('Ctrl+C to exit...');
+});
 
 /**
- * Следим за датой изменения файла с данными.
- * Если файл обновился, отправляем клиентам новые данные
+ * Служебный локальный сервер
+ */
+// http.createServer(function(request, response) {
+// 	if (request.method === 'POST') {
+// 		receivePOST(request, response, function(newData) {
+// 			updateData(newData);
+// 			sendData();
+// 		});
+// 	} else {
+// 		response.end();
+// 	}
+// }).listen(8888, '127.0.0.1');
+
+/**
+ * Дежурный по data-файлу следит за изменением
  */
 fs.watchFile(datafile, function(curr, prev) {
 	if (curr.mtime.getTime() !== prev.mtime.getTime()) {
-		data = {
-			current: getData(),
-			previous: data.current
-		};
+		updateData(getDatafile());
 		sendData();
 	}
 });
+
+/**
+ * Получение данных из POST-запроса
+ * @param object request
+ * @param object response
+ * @param function callback
+ */
+// function receivePOST(request, response, callback) {
+// 	var postData = '';
+// 	request.on('data', function(postDataChunk) {
+// 		postData += decodeURIComponent(postDataChunk.toString());
+// 	});
+// 	request.on('end', function() {
+// 		response.end();
+// 		callback(postData);
+// 	});
+// }
+
+/**
+ * Обновление данных
+ * @param string newdata
+ */
+function updateData(newData) {
+	data = {
+		current: newData,
+		previous: data.current
+	};
+}
 
 /**
  * Server-Sent Events (SSE)
@@ -100,7 +141,7 @@ function sendData(username) {
  * Получаем содержимое файла с данными
  * return string
  */
-function getData() {
+function getDatafile() {
 	try {
 		return fs.readFileSync(datafile, 'utf8');
 	} catch (error) {
