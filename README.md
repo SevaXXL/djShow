@@ -10,27 +10,29 @@
 
 ## Пошаговая инструкция
 
-**Шаг 1. Готовим экспорт данных из плейера**
+**Шаг 1. Копируем файлы и включаем мини-сервер**
+
+Скачиваем с Github'а файлы djShow кнопкой `Download ZIP` и разархивируем в любое удобное место на компьютере. Например, `D:\djShow` (Windows), или `~/djShow` (Mac, Linux). Расположение и название папки может быть любым. Для работы также необходима программа NodeJS, которую устанавливаем с официального сайта http://nodejs.org. Можно установить всё по умолчанию, можно только саму программу (без npm и прочего). С помощью NodeJS запускаем скрипт из папки проекта `server.js`:
+- Windows - в папке проекта создаем файл start.bat с содержимым: `"C:\Program Files\nodejs\node.exe" server.js`
+- Mac и Linux - в Терминале пишем: `$ sudo node ~/djShow/server.js`
+
+На этом этапе сервер уже работает по адресу: http://localhost или http://127.0.0.1. Можно открыть эту страницу в браузере и подключить второй экран или проектор и увидеть информацию из файла NowPlaying.txt.
+
+**Шаг 2. Готовим экспорт данных из плейера**
+
+Необходимо настроить музыкальный проигрыватель так, чтобы он экспортировал информацию об исполняемой композиции. Это можно сделать с помощью плагинов к плейеру или отдельных скриптов.
 
 Протестированные решения под Windows:
-- Для Aimp необходим плагин Current track info to file. Инструкция: https://github.com/SevaXXL/djShow/wiki/Export-from-Aimp-Windows
-- Для Foobar2000 - плагин Now Playing Simple. Инструкция: https://github.com/SevaXXL/djShow/wiki/Export-from-Foobar2000-Windows
-- Для iTunes, Winamp, Windows Media Player также есть плагины - уточните в группе.
+- Для Aimp необходим плагин Current track info to file. Ссылка на плагин и инструкция по настройке тут: wiki/Export-from-Aimp-Windows
+- Для Foobar2000 - плагин Now Playing Simple. Ссылка на плагин и инструкция тут: wiki/Export-from-Foobar2000-Windows
+- Для iTunes, Winamp, Windows Media Player существует несколько решений - уточните в группе проекта.
 
 Под Mac:
 - Для iTunes, Swinsian и VOX - скрипты NowPlaying[...].app, приложены в папке additional. Для других поригрывателей под Mac можно написать аналогичные скрипты самостоятельно (смотрите код).
-- В плейере Djay файл NowPlaying.txt создается автоматически и лежит в папке /Users/%username%/Music/djay
+- В плейере Djay файл NowPlaying.txt создается автоматически и лежит в папке ~/Music/djay
 
 Под Linux
-- Для Clementine скрипт на python - уточните в группе.
-
-**Шаг 2. Включаем мини-сервер**
-
-Для этого необходима программа NodeJS, которую устанавливаем с официального сайта http://nodejs.org. С помощью NodeJS запускаем скрипт `server.js`:
-- Windows - создаем файл start.bat с содержимым: `"C:\Program Files\nodejs\node.exe" server.js`
-- Mac и Linux - `$ sudo node  путь_к_скрипту/server.js`.
-
-На этом этапе программа уже работает по адресу: http://localhost или http://127.0.0.1. Можно открыть эту страницу в браузере и подключить второй экран или проектор.
+- Для Clementine скрипт на python в папке additional.
 
 **Шаг 3. Создаем сеть**
 
@@ -39,7 +41,7 @@
 
 ## Контакты
 
-Если есть вопросы, пожалуйста, обращайтесь по email: adeinega@mail.ru. Группа проекта djShow на Facebook - https://www.facebook.com/groups/448365622022494/
+Если есть вопросы, пожалуйста, обращайтесь по email: adeinega@mail.ru, или пишите в группе проекта djShow на Facebook - https://www.facebook.com/groups/448365622022494/
 
 
 ## Версии
