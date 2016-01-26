@@ -23,8 +23,8 @@
 Необходимо настроить музыкальный проигрыватель так, чтобы он экспортировал информацию об исполняемой композиции. Это можно сделать с помощью плагинов к плейеру или отдельных скриптов.
 
 Протестированные решения под Windows:
-- Для Aimp необходим плагин Current track info to file. Ссылка на плагин и инструкция по настройке тут: <wiki/Export-from-Aimp-Windows>
-- Для Foobar2000 - плагин Now Playing Simple. Ссылка на плагин и инструкция тут: <wiki/Export-from-Foobar2000-Windows>
+- Для Aimp необходим плагин Current track info to file. Ссылка на плагин и инструкция по настройке: https://github.com/SevaXXL/djShow/wiki/Export-from-Aimp-Windows
+- Для Foobar2000 - плагин Now Playing Simple. Ссылка на плагин и инструкция: https://github.com/SevaXXL/djShow/wiki/Export-from-Foobar2000-Windows
 - Для iTunes, Winamp, Windows Media Player существует несколько решений - уточните в группе проекта.
 
 Под Mac:
