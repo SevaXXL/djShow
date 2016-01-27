@@ -17,7 +17,7 @@
  *  along with djShow. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var version  = '2.2.2',
+var version  = '2.3.0',
 	datafile = __dirname + '/' + 'NowPlaying.txt';
 
 var http  = require('http'),
@@ -31,7 +31,7 @@ var http  = require('http'),
 	};
 
 /**
- * Основной сервер
+ * Сервер
  */
 http.createServer(function(request, response) {
 	request.on('end', function() {
@@ -48,21 +48,7 @@ http.createServer(function(request, response) {
 });
 
 /**
- * Служебный локальный сервер
- */
-// http.createServer(function(request, response) {
-// 	if (request.method === 'POST') {
-// 		receivePOST(request, response, function(newData) {
-// 			updateData(newData);
-// 			sendData();
-// 		});
-// 	} else {
-// 		response.end();
-// 	}
-// }).listen(8888, '127.0.0.1');
-
-/**
- * Дежурный по data-файлу следит за изменением
+ * Следим за изменением data-файла
  */
 fs.watchFile(datafile, function(curr, prev) {
 	if (curr.mtime.getTime() !== prev.mtime.getTime()) {
@@ -70,23 +56,6 @@ fs.watchFile(datafile, function(curr, prev) {
 		sendData();
 	}
 });
-
-/**
- * Получение данных из POST-запроса
- * @param object request
- * @param object response
- * @param function callback
- */
-// function receivePOST(request, response, callback) {
-// 	var postData = '';
-// 	request.on('data', function(postDataChunk) {
-// 		postData += decodeURIComponent(postDataChunk.toString());
-// 	});
-// 	request.on('end', function() {
-// 		response.end();
-// 		callback(postData);
-// 	});
-// }
 
 /**
  * Обновление данных

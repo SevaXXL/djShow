@@ -19,7 +19,7 @@
 
 
 /** 
- * djShow v2.2.2
+ * djShow v2.3.0
  *
  * @param string container - идентификатор блока-контейнера
  * @param object options - дополнительные параметры
@@ -36,7 +36,8 @@ var djShow = function(container, options) {
 	var latency = options.latency || 3000,
 		sunset  = options.sunset  || function() {},
 		sunrise = options.sunrise || function() {},
-		preload = options.preload || [];
+		preload = options.preload || [],
+		remark  = options.remark  || { artist: 'Исполнитель', previous: 'Предыдущая' };
 
 	/**
 	 * Предзагрузка изображений
@@ -53,7 +54,7 @@ var djShow = function(container, options) {
 	 * Поиск элемента по шаблону
 	 * @param string needle - искомый элемент
 	 * @param string haystack - текст, в котором осуществляется поиск
-	 * return string || undefined - найденное совпадение
+	 * return string || undefined - найденный элемент
 	 */
 	var getName = function(needle, haystack) {
 		var regmatch = {
@@ -117,7 +118,7 @@ var djShow = function(container, options) {
 		var current_artist = getName('artist', data.current);
 		if (current_artist && !except(current_artist)) {
 			current_artist = current_artist.split(' - ');
-			html += '<p>Исполнитель:</p>';
+			html += '<p>' + remark.artist + ':</p>';
 			html += '<h1>' + current_artist[0] + '</h1>';
 			if (current_artist[1]) {
 				html += '<h3>(' + current_artist[1].trim() + ')</h3>';
@@ -126,7 +127,7 @@ var djShow = function(container, options) {
 
 		var previous_title = getName('title', data.previous);
 		if (previous_title && !except(previous_title)) {
-			html += '<p class="previous">Предыдущая: &ldquo;' + previous_title + '&rdquo;';
+			html += '<p class="previous">' + remark.previous + ': &ldquo;' + previous_title + '&rdquo;';
 			var previous_artist = getName('artist', data.previous);
 			if (previous_artist && !except(previous_artist)) {
 				previous_artist = previous_artist.split(' - ');
