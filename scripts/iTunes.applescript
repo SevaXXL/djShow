@@ -1,4 +1,4 @@
--- Script Editor: File > Export > Application - Stay open after run hundler
+-- Script Editor: File > Export > Application + Stay open after run hundler
 
 global dataFile
 global previousTrackID
