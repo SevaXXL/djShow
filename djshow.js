@@ -85,11 +85,12 @@ var djShow = function(container, options) {
 	var except = function(text) {
 		// Все строчными
 		var exclude = [
-				'?',
-				'missing value',
-				'n/a',
-				'various artists'
-			];
+			'?',
+			'missing value',
+			'n/a',
+			'nothing',
+			'various artists'
+		];
 		if (Array.prototype.indexOf) {
 			return exclude.indexOf(text.toLowerCase()) + 1;
 		}
