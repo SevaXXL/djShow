@@ -1,51 +1,44 @@
-#!usr/bin/env python
-
 import dbus
 import dbus.mainloop.glib
 import gobject
 import sys
-import os
+from os import path
 
-filename = os.path.realpath(os.path.dirname(sys.argv[0])) + '/' + 'NowPlaying.txt'
+filename = path.realpath(path.dirname(sys.argv[0])) + '/' + 'NowPlaying.txt'
 
-def metatostr(meta):
-	'''Parse data'''
-	data = ''
+def parseMeta(meta):
+	data = []
 	try:
-		data += 'Title: ' + meta['title'] + '\n'
+		data.append('Title: ' + meta[u'title'])
 	except:
 		pass
 	try:
-		data += 'Artist: ' + meta['artist'] + '\n'
+		data.append('Artist: ' + meta[u'artist'])
 	except:
 		pass
-	return data
+	return "\n".join(data).encode('utf-8')
 
-def trackchanged(data):
-	'''Callback handler track changed event'''
-	savedata()
+def trackChanged(data):
+	saveData()
 
-def savedata():
-	'''Save data to file'''
+def saveData():
 	global iface
 	global filename
 	status = iface.GetStatus()[0]
 	if status == 0:
 		meta = iface.GetMetadata()
-		data = metatostr(meta)
-		
+		data = parseMeta(meta)
 		datafile = open(filename, 'w')
-		datafile.write(data.encode('utf-8'))
+		datafile.write(data)
 		datafile.close()
 
-# Main
 dbus.mainloop.glib.DBusGMainLoop(set_as_default = True)
 try:
 	session_bus = dbus.SessionBus()
 	player = session_bus.get_object('org.mpris.clementine', '/Player')
 	iface = dbus.Interface(player, dbus_interface='org.freedesktop.MediaPlayer')
-	iface.connect_to_signal("TrackChange", trackchanged)
-	savedata()
+	iface.connect_to_signal("TrackChange", trackChanged)
+	saveData()
 except:
 	print 'Player not running'
 	sys.exit(1)
@@ -57,4 +50,4 @@ print 'Ctrl+C to exit...'
 try:
 	mainloop.run()
 except KeyboardInterrupt:
-	sys.exit(1);
+	sys.exit(1)
