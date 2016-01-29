@@ -32,7 +32,7 @@
 - В плейере Djay файл NowPlaying.txt создается автоматически и лежит в папке ~/Music/djay
 
 Под Linux
-- Для Clementine - соответствующий скрипт в папке scripts.
+- Для Clementine и Deadbeef - соответствующие скрипты в папке scripts.
 
 **Шаг 3. Создаем сеть**
 
