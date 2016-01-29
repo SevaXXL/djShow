@@ -23,16 +23,16 @@
 Необходимо настроить музыкальный проигрыватель так, чтобы он экспортировал информацию об исполняемой композиции. Это можно сделать с помощью плагинов к плейеру или скриптов.
 
 Протестированные решения под Windows:
-- Для Aimp необходим плагин Current track info to file. Ссылка на плагин и инструкция по настройке: https://github.com/SevaXXL/djShow/wiki/Export-from-Aimp-Windows
-- Для Foobar2000 - плагин Now Playing Simple. Ссылка на плагин и инструкция по настройке: https://github.com/SevaXXL/djShow/wiki/Export-from-Foobar2000-Windows
-- Для iTunes, Winamp и Windows Media Player существует несколько решений - уточните в группе проекта.
+- Для **Aimp** необходим плагин Current track info to file. Ссылка на плагин и инструкция по настройке: https://github.com/SevaXXL/djShow/wiki/Export-from-Aimp-Windows
+- Для **Foobar2000** - плагин Now Playing Simple. Ссылка на плагин и инструкция по настройке: https://github.com/SevaXXL/djShow/wiki/Export-from-Foobar2000-Windows
+- Для **iTunes, Winamp** и **Windows Media Player** существует несколько решений - уточните в группе проекта.
 
 Под Mac:
-- Для iTunes, Swinsian и VOX данные в файл экспортируют соответствующие скрипты из папки scripts. Для других проигрывателей под Mac можно написать аналогичные скрипты самостоятельно (смотрите код).
-- В плейере Djay файл NowPlaying.txt создается автоматически и лежит в папке ~/Music/djay
+- Для **iTunes, Swinsian** и **VOX** данные в файл экспортируют соответствующие скрипты из папки scripts. Для других проигрывателей под Mac можно написать аналогичные скрипты самостоятельно (смотрите код).
+- В плейере **Djay** файл NowPlaying.txt создается автоматически и лежит в папке ~/Music/djay
 
 Под Linux
-- Для Clementine и Deadbeef - соответствующие скрипты в папке scripts.
+- Для **Clementine** и **Deadbeef** - соответствующие скрипты в папке scripts.
 
 **Шаг 3. Создаем сеть**
 
