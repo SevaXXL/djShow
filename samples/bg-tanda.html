@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>djShow</title>
+		<meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-touch-fullscreen" content="yes">
+		<style>
+			html {
+				height: 100%;
+				min-height: 100%;
+			}
+			body {
+				color: #fff;
+				margin: 0;
+				padding: 0;
+				font-size: 32pt;
+				text-align: center;
+				min-height: 100%;
+				/*background-image: url(background.jpg);*/
+				background-attachment: fixed;
+				-webkit-background-size: cover;
+				   -moz-background-size: cover;
+					 -o-background-size: cover;
+						background-size: cover;
+			}
+			h1 {
+				margin: 0;
+				font-size: 3em;
+				line-height: 1em;
+			}
+			h2 {
+				margin: 0;
+				padding-top: 0.83em;
+				font-size: 2em;
+			}
+			h3 {
+				margin: 0;
+				font-size: 2em;
+				font-style: italic;
+				font-weight: normal;
+			}
+			p {
+				margin: 0;
+				padding: 1.2em 0 .3em;
+			}
+			.previous {
+				padding-top: 2em;
+			}
+			#container {
+				margin: 0 16px;
+				-webkit-transition: opacity 3s ease;
+				   -moz-transition: opacity 3s ease;
+					 -o-transition: opacity 3s ease;
+						transition: opacity 3s ease;
+			}
+			/* Заставка для плавного изменения фона */
+			#shade {
+				background-color: #000;
+				opacity: 0;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				position: fixed;
+				-webkit-transition: opacity 3s ease;
+				   -moz-transition: opacity 3s ease;
+					 -o-transition: opacity 3s ease;
+						transition: opacity 3s ease;
+			}
+			@media (max-width: 958px) {
+				body {
+					font-size: 18pt;
+				}
+			}
+			@media (max-width: 598px) {
+				body {
+					font-size: 14pt;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<div id="container"></div>
+		<div id="shade"></div>
+		<script src="djshow.js"></script>
+		<script>
+			/**
+			 * Смена фона при смене жанра
+			 * 1. От сервера должен передаваться дополнительный праметр genre
+			 * 2. В папке проекта должны лежать файлы для фона
+			 */
+			djShow('container', {
+				preload: [
+					'milonga.jpg',
+					'other.jpg',
+					'tango.jpg',
+					'vals.jpg'
+				],
+				sunset: function(data) {
+
+					data.current = data.current || '';
+					data.previous = data.previous || '';
+
+					var genre = {};
+					var params = {
+						other: 'other',
+						approved: /^(milonga|tango|vals)$/,
+						regmatch: /<genre>(.+)<\/genre>/i,
+						getGenre: function(haystack) {
+							var needle = haystack.match(this.regmatch);
+							if (needle) {
+								needle = needle[1].toLowerCase();
+								return (this.approved.test(needle)) ? needle : this.other;
+							} else {
+								return this.other;
+							}
+						}
+					};
+
+					genre.first = (document.getElementById('container').innerHTML) ? false : true;
+					genre.current = params.getGenre(data.current);
+					genre.previous = params.getGenre(data.previous);
+
+					if (genre.current !== genre.previous && !genre.first) {
+						document.getElementById('shade').style.opacity = '1';
+					}
+					return genre;
+				},
+				sunrise: function(genre) {
+					if (genre.current !== genre.previous || genre.first) {
+						document.body.style.backgroundImage = 'url(' + genre.current + '.jpg)';
+						document.getElementById('shade').style.opacity = '0';
+					}
+				}
+			});
+		</script>
+	</body>
+</html>
