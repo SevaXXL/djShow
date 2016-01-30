@@ -58,13 +58,13 @@
 			}
 			/* Заставка для плавного изменения фона */
 			#shade {
-				background-color: #000;
-				opacity: 0;
 				top: 0;
+				left: 0;
 				right: 0;
 				bottom: 0;
-				left: 0;
+				opacity: 0;
 				position: fixed;
+				background-color: #000;
 				-webkit-transition: opacity 3s ease;
 				   -moz-transition: opacity 3s ease;
 					 -o-transition: opacity 3s ease;
@@ -89,8 +89,8 @@
 		<script>
 			/**
 			 * Смена фона при смене жанра
-			 * 1. От сервера должен передаваться дополнительный праметр genre
-			 * 2. В папке проекта должны лежать файлы для фона
+			 * Плейер должен экспортировать дополнительный праметр <genre>...
+			 * ...и добавлены изображения для фона
 			 */
 			djShow('container', {
 				preload: [

@@ -58,13 +58,13 @@
 			}
 			/* Заставка для плавного изменения фона */
 			#shade {
-				background-color: #000;
-				opacity: 0;
 				top: 0;
+				left: 0;
 				right: 0;
 				bottom: 0;
-				left: 0;
+				opacity: 0;
 				position: fixed;
+				background-color: #000;
 				-webkit-transition: opacity 3s ease;
 				   -moz-transition: opacity 3s ease;
 					 -o-transition: opacity 3s ease;
@@ -88,7 +88,8 @@
 		<script src="djshow.js"></script>
 		<script>
 			/**
-			 * Смена фона через каждые n песен (параметр count.max)
+			 * Смена фона через каждые n песен (указывается в count.max)
+			 * Ссылки на изображения для фона указываются в images
 			 */
 			var count = {
 				slide: 0,
