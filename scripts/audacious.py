@@ -37,9 +37,10 @@ def saveData():
 dbus.mainloop.glib.DBusGMainLoop(set_as_default = True)
 session_bus = dbus.SessionBus()
 try:
-	player = session_bus.get_object('org.mpris.clementine', '/Player')
+	player = session_bus.get_object('org.mpris.audacious', '/Player')
 	iface = dbus.Interface(player, dbus_interface='org.freedesktop.MediaPlayer')
-	iface.connect_to_signal("TrackChange", trackChanged)
+	# iface.connect_to_signal("TrackChange", trackChanged)
+	iface.connect_to_signal("StatusChange", trackChanged)
 	saveData()
 except:
 	print 'Player not running'
