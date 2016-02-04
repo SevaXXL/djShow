@@ -33,7 +33,7 @@
 - В плейере **Djay** файл NowPlaying.txt создается автоматически и лежит в папке ~/Music/djay
 
 Под Linux
-- Для **Clementine** и **Deadbeef** - соответствующие скрипты в папке scripts.
+- Для **Audacious**, **Clementine** и **Deadbeef** - соответствующие скрипты в папке scripts.
 
 ### Шаг 3. Создаем сеть
 
