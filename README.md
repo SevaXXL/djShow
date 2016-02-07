@@ -27,13 +27,14 @@
 - Для **Foobar2000** - плагин [Now Playing Simple](https://github.com/SevaXXL/djShow/wiki/Export-from-Foobar2000-Windows)
 - Для **MusicBee** - плагин [Now Playing to External Files](https://github.com/SevaXXL/djShow/wiki/Export-from-MusicBee-Windows)
 - Для **iTunes, Winamp** и **Windows Media Player** существует несколько решений - уточните в группе проекта.
+- Для **Traktor** - скрипт в папке scripts.
 
 Под Mac:
-- Для **iTunes, Swinsian** и **VOX** данные в файл экспортируют соответствующие скрипты из папки scripts. Для других проигрывателей под Mac можно написать аналогичные скрипты самостоятельно (смотрите код).
+- Для **iTunes, Swinsian, Traktor** и **VOX** данные в файл экспортируют соответствующие скрипты из папки scripts. Для других проигрывателей под Mac можно написать аналогичные скрипты самостоятельно (смотрите код).
 - В плейере **Djay** файл NowPlaying.txt создается автоматически и лежит в папке ~/Music/djay
 
 Под Linux
-- Для **Audacious**, **Clementine** и **Deadbeef** - соответствующие скрипты в папке scripts.
+- Для **Audacious, Clementine** и **Deadbeef** - соответствующие скрипты в папке scripts.
 
 ### Шаг 3. Создаем сеть
 
