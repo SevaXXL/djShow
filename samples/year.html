@@ -83,13 +83,13 @@
 			 * Плейер должен экспортировать дополнительный параметр <year>
 			 */
 			djShow('container', {
-				sunset: function(data) {
+				sunset: function (data) {
 					var year = data.current.match(/<year>(.+)<\/year>/);
 					if (year && year[1] > 0) {
 						return year[1];
 					}
 				},
-				sunrise: function(year) {
+				sunrise: function (year) {
 					if (year) {
 						var container = document.getElementById('container');
 						var title = container.getElementsByTagName('h2');

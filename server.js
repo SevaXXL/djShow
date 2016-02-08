@@ -17,14 +17,15 @@
  *  along with djShow. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var version  = '2.3.0',
+var version  = '2.3.1',
 	datafile = __dirname + '/' + 'NowPlaying.txt';
 
-var http  = require('http'),
-	fs    = require('fs'),
+var fs    = require('fs'),
+	http  = require('http'),
 	path  = require('path'),
 	parse = require('url').parse,
 	net   = require('os').networkInterfaces(),
+	port  = +process.argv[2] || 80,
 	users = [],
 	data  = {
 		current: getDatafile()
@@ -33,8 +34,8 @@ var http  = require('http'),
 /**
  * Сервер
  */
-http.createServer(function(request, response) {
-	request.on('end', function() {
+http.createServer(function (request, response) {
+	request.on('end', function () {
 		if ('/event' === request.url) {
 			sendSSE(request, response);
 		} else {
@@ -42,15 +43,15 @@ http.createServer(function(request, response) {
 			sendFile(request, response);
 		}
 	}).resume();
-}).listen(80, function() {
-	console.log('*** djShow *** running at http://' + (getIP() || '127.0.0.1'));
-	console.log('Ctrl+C to exit...');
+}).listen(port, function () {
+	var adress = getIP() + ((process.argv[2]) ? ':' + port : '');
+	console.log('*** djShow *** running at http://' + adress + '\nCtrl+C to exit...');
 });
 
 /**
- * Следим за изменением data-файла
+ * Реагируем на изменение datafile
  */
-fs.watchFile(datafile, function(curr, prev) {
+fs.watchFile(datafile, function (curr, prev) {
 	if (curr.mtime.getTime() !== prev.mtime.getTime()) {
 		updateData(getDatafile());
 		sendData();
@@ -84,7 +85,7 @@ function sendSSE(request, response) {
 	});
 	response.write('retry: 5000\n');
 	sendData(username);
-	request.on('close', function() {
+	request.on('close', function () {
 		users[username].end();
 		delete users[username];
 	});
@@ -98,7 +99,7 @@ function sendData(username) {
 	var message = 'data: ' + JSON.stringify(data) + '\n\n';
 	message = new Buffer(message, 'utf8');
 	if (typeof username === 'undefined') {
-		users.forEach(function(user) {
+		users.forEach(function (user) {
 			user.write(message);
 		});
 	} else {
@@ -114,7 +115,7 @@ function getDatafile() {
 	try {
 		return fs.readFileSync(datafile, 'utf8');
 	} catch (error) {
-		return 'Title: Проверьте файл ' + datafile;
+		return 'Title: Check file ' + datafile;
 	}
 }
 
@@ -126,7 +127,7 @@ function getDatafile() {
 function sendFile(request, response) {
 	request.url = path.normalize(parse(request.url).pathname);
 	var filename = __dirname + request.url;
-	fs.stat(filename, function(error, stat) {
+	fs.stat(filename, function (error, stat) {
 		response.setHeader('Server', 'djShow/' + version);		
 		if (error) {
 			if ('ENOENT' === error.code) {
@@ -155,7 +156,7 @@ function sendFile(request, response) {
 				response.setHeader('Content-Type', getMimeType(request.url));
 				var stream = fs.createReadStream(filename);
 				stream.pipe(response);
-				stream.on('error', function() {
+				stream.on('error', function () {
 					response.statusCode = 500;
 					response.end('Internal Server Error');
 				});
@@ -199,4 +200,5 @@ function getIP() {
 			}
 		}
 	}
+	return '127.0.0.1';
 }

@@ -103,7 +103,7 @@
 
 			djShow('container', {
 				preload: images,
-				sunset: function() {
+				sunset: function () {
 					count.slide++;
 					if (count.slide > count.max) {
 						count.slide = 0;
@@ -111,7 +111,7 @@
 						return true;
 					}
 				},
-				sunrise: function(action) {
+				sunrise: function (action) {
 					if (action) {
 						count.background++;
 						if (count.background >= images.length) {

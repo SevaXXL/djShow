@@ -99,7 +99,7 @@
 					'tango.jpg',
 					'vals.jpg'
 				],
-				sunset: function(data) {
+				sunset: function (data) {
 
 					data.current = data.current || '';
 					data.previous = data.previous || '';
@@ -109,7 +109,7 @@
 						other: 'other',
 						approved: /^(milonga|tango|vals)$/,
 						regmatch: /<genre>(.+)<\/genre>/i,
-						getGenre: function(haystack) {
+						getGenre: function (haystack) {
 							var needle = haystack.match(this.regmatch);
 							if (needle) {
 								needle = needle[1].toLowerCase();
@@ -129,7 +129,7 @@
 					}
 					return genre;
 				},
-				sunrise: function(genre) {
+				sunrise: function (genre) {
 					if (genre.current !== genre.previous || genre.first) {
 						document.body.style.backgroundImage = 'url(' + genre.current + '.jpg)';
 						document.getElementById('shade').style.opacity = '0';

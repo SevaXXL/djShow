@@ -17,14 +17,13 @@
  *  along with djShow. If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 /** 
- * djShow v2.3.0
+ * djShow v2.3.1
  *
  * @param string container - идентификатор блока-контейнера
  * @param object options - дополнительные параметры
  */
-var djShow = function(container, options) {
+var djShow = function (container, options) {
 
 	'use strict';
 
@@ -34,10 +33,10 @@ var djShow = function(container, options) {
 	options = options || {};
 
 	var latency = options.latency || 3000,
-		sunset  = options.sunset  || function() {},
-		sunrise = options.sunrise || function() {},
+		sunset  = options.sunset  || function () {},
+		sunrise = options.sunrise || function () {},
 		preload = options.preload || [],
-		remark  = options.remark  || { artist: 'Исполнитель', previous: 'Предыдущая' };
+		remark  = options.remark  || { artist: 'Исполнитель:', previous: 'Предыдущая:' };
 
 	/**
 	 * Предзагрузка изображений
@@ -51,25 +50,23 @@ var djShow = function(container, options) {
 	}
 
 	/**
-	 * Поиск элемента по шаблону
+	 * Поиск элемента в тексте по шаблону
 	 * @param string needle - искомый элемент
 	 * @param string haystack - текст, в котором осуществляется поиск
-	 * return string || undefined - найденный элемент
+	 * return string || undefined - найденное значение
 	 */
-	var getName = function(needle, haystack) {
-		var regmatch = {
-			title: [
-				/Title: (.+)/i,
-				/<title>(.+)<\/title>/i
-			],
-			artist: [
-				/Artist: (.+)/i,
-				/<artist>(.+)<\/artist>/i
-			]
-		};
-		if (needle in regmatch && typeof haystack === 'string') {
-			for (var i = 0; i < regmatch[needle].length; i++) {
-				var result = haystack.match(regmatch[needle][i]);
+	var getName = function (needle, haystack) {
+		var regmatch,
+			result,
+			template = [
+			'%s: (.+)',
+			'<%s>(.+)<\/%s>'
+		];
+		if (typeof haystack === 'string') {
+			for (var i = 0; i < template.length; i++) {
+				template[i] = template[i].replace(/%s/g, needle);
+				regmatch = new RegExp(template[i], 'i');
+				result = haystack.match(regmatch);
 				if (result) {
 					return result[1].replace(/\(.+\)/, '').trim();
 				}
@@ -82,7 +79,7 @@ var djShow = function(container, options) {
 	 * @param string text - строка для сравнения
 	 * return integer || undefined
 	 */
-	var except = function(text) {
+	var except = function (text) {
 		// Все строчными
 		var exclude = [
 			'?',
@@ -100,7 +97,7 @@ var djShow = function(container, options) {
 	 * Обработчик сообщения от сервера
 	 * @param string event
 	 */
-	var parseMessage = function(event) {
+	var parseMessage = function (event) {
 
 		var data = JSON.parse(event.data);
 		var html = '';
@@ -119,7 +116,7 @@ var djShow = function(container, options) {
 		var current_artist = getName('artist', data.current);
 		if (current_artist && !except(current_artist)) {
 			current_artist = current_artist.split(' - ');
-			html += '<p>' + remark.artist + ':</p>';
+			html += '<p>' + remark.artist + '</p>';
 			html += '<h1>' + current_artist[0] + '</h1>';
 			if (current_artist[1]) {
 				html += '<h3>(' + current_artist[1].trim() + ')</h3>';
@@ -128,7 +125,7 @@ var djShow = function(container, options) {
 
 		var previous_title = getName('title', data.previous);
 		if (previous_title && !except(previous_title)) {
-			html += '<p class="previous">' + remark.previous + ': &ldquo;' + previous_title + '&rdquo;';
+			html += '<p class="previous">' + remark.previous + ' &ldquo;' + previous_title + '&rdquo;';
 			var previous_artist = getName('artist', data.previous);
 			if (previous_artist && !except(previous_artist)) {
 				previous_artist = previous_artist.split(' - ');
@@ -138,7 +135,7 @@ var djShow = function(container, options) {
 		}
 
 		if (container.innerHTML !== '') {
-			setTimeout(function() {
+			setTimeout(function () {
 				container.innerHTML = html;
 				container.style.opacity = '1';
 				sunrise(sunsend);
@@ -152,14 +149,14 @@ var djShow = function(container, options) {
 	/**
 	 * Обработчик ошибок
 	 */
-	var parseError = function() {
+	var parseError = function () {
 		container.innerHTML = '';
 	};
 
 	/**
 	 * Перед вызовом EventSource все http-запросы должны быть завершены
 	 */
-	window.onload = function() {
+	window.onload = function () {
 		var eventSource = new EventSource('/event');
 		eventSource.onmessage = parseMessage;
 		eventSource.onerror = parseError;
