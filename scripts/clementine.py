@@ -1,5 +1,3 @@
-#!/usr/bin/env python
-
 import dbus
 import dbus.mainloop.glib
 import gobject
@@ -10,15 +8,11 @@ filename = path.realpath(path.dirname(sys.argv[0])) + '/' + 'NowPlaying.txt'
 
 def parseMeta(meta):
 	data = []
-	try:
-		data.append('Title: ' + meta[u'title'])
-	except:
-		pass
-	try:
-		data.append('Artist: ' + meta[u'artist'])
-	except:
-		pass
-	return "\n".join(data).encode('utf-8')
+	if 'title' in meta:
+		data.append('Title: ' + meta['title'])
+	if 'artist' in meta:
+		data.append('Artist: ' + meta['artist'])
+	return "\n".join(data)
 
 def trackChanged(data):
 	saveData()
@@ -31,7 +25,7 @@ def saveData():
 		meta = iface.GetMetadata()
 		data = parseMeta(meta)
 		datafile = open(filename, 'w')
-		datafile.write(data)
+		datafile.write(data.encode('utf-8'))
 		datafile.close()
 
 dbus.mainloop.glib.DBusGMainLoop(set_as_default = True)
