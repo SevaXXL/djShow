@@ -17,7 +17,7 @@
  *  along with djShow. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var version  = '2.3.1',
+var version  = '2.4.0',
 	datafile = __dirname + '/' + 'NowPlaying.txt';
 
 var fs    = require('fs'),
@@ -25,11 +25,29 @@ var fs    = require('fs'),
 	path  = require('path'),
 	parse = require('url').parse,
 	net   = require('os').networkInterfaces(),
-	port  = +process.argv[2] || 80,
+	port  = 80,
 	users = [],
-	data  = {
-		current: getDatafile()
-	};
+	child = [],
+	data  = { current: getDatafile() },
+	fork;
+
+/**
+ * Обрабатываем дополнительно переданные параметры
+ * node server.js param param ... param
+ */
+for (var i = 2; i < process.argv.length; i++) {
+	if (/^\d+$/.test(process.argv[i])) {
+		port = +process.argv[i];
+	} else {
+		fork = fork || require('child_process').fork;
+		child[i] = fork(__dirname + '/' + process.argv[i]);
+		child[i].on('message', function (newData) {
+			updateData(newData);
+			sendData();
+		});
+		console.log('Include ' + process.argv[i]);
+	}
+}
 
 /**
  * Сервер
@@ -44,7 +62,7 @@ http.createServer(function (request, response) {
 		}
 	}).resume();
 }).listen(port, function () {
-	var adress = getIP() + ((process.argv[2]) ? ':' + port : '');
+	var adress = getIP() + ((port == 80) ? '' : ':' + port);
 	console.log('*** djShow *** running at http://' + adress + '\nCtrl+C to exit...');
 });
 

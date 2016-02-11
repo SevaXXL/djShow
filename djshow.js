@@ -18,7 +18,7 @@
  */
 
 /** 
- * djShow v2.3.1
+ * djShow v2.4.0
  *
  * @param string container - идентификатор блока-контейнера
  * @param object options - дополнительные параметры
