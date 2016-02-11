@@ -26,7 +26,7 @@
 - В плейере **Djay** файл NowPlaying.txt создается автоматически и лежит в папке ~/Music/djay
 
 Под Linux
-- Для **Audacious, Clementine, Deadbeef**, **Rhythmbox** - соответствующие скрипты в папке scripts.
+- Для **Audacious, Clementine, Deadbeef** и **Rhythmbox** - соответствующие скрипты в папке scripts.
 
 ### Шаг 2. Копируем файлы и включаем мини-сервер
 
