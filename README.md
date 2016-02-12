@@ -12,12 +12,12 @@
 
 ### Шаг 1. Готовим экспорт данных из плейера
 
-Необходимо настроить музыкальный проигрыватель так, чтобы он экспортировал информацию об исполняемой композиции. Это можно сделать с помощью плагинов к плейеру или скриптов.
+Необходимо настроить музыкальный проигрыватель так, чтобы он экспортировал информацию об исполняемой композиции. Это можно сделать с помощью плагинов к плейеру или скриптов. Инструкцию по настройке читайте в [Wiki](wiki).
 
 Протестированные решения под Windows:
-- Для **Aimp** необходим плагин [Current track info to file](https://github.com/SevaXXL/djShow/wiki/Export-from-Aimp-Windows)
-- Для **Foobar2000** - плагин [Now Playing Simple](https://github.com/SevaXXL/djShow/wiki/Export-from-Foobar2000-Windows)
-- Для **MusicBee** - плагин [Now Playing to External Files](https://github.com/SevaXXL/djShow/wiki/Export-from-MusicBee-Windows)
+- Для **Aimp** необходим плагин [Current track info to file](wiki/Export-from-Aimp)
+- Для **Foobar2000** - плагин [Now Playing Simple](https://github.com/SevaXXL/djShow/wiki/Export-from-Foobar2000)
+- Для **MusicBee** - плагин [Now Playing to External Files](https://github.com/SevaXXL/djShow/wiki/Export-from-MusicBee)
 - Для **iTunes, Winamp** и **Windows Media Player** существует несколько решений - уточните в группе проекта.
 - Для **Traktor** - скрипт в папке scripts.
 
