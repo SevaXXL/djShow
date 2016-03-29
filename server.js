@@ -17,7 +17,7 @@
  *  along with djShow. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var version  = '2.4.0',
+var version  = '2.4.1',
 	datafile = __dirname + '/' + 'NowPlaying.txt';
 
 var fs    = require('fs'),
@@ -25,10 +25,10 @@ var fs    = require('fs'),
 	path  = require('path'),
 	parse = require('url').parse,
 	net   = require('os').networkInterfaces(),
+	data  = { current: getDatafile() },
 	port  = 80,
 	users = [],
 	child = [],
-	data  = { current: getDatafile() },
 	fork;
 
 /**
@@ -39,13 +39,13 @@ for (var i = 2; i < process.argv.length; i++) {
 	if (/^\d+$/.test(process.argv[i])) {
 		port = +process.argv[i];
 	} else {
+		console.log('Include ' + process.argv[i]);
 		fork = fork || require('child_process').fork;
 		child[i] = fork(__dirname + '/' + process.argv[i]);
 		child[i].on('message', function (newData) {
 			updateData(newData);
 			sendData();
 		});
-		console.log('Include ' + process.argv[i]);
 	}
 }
 
@@ -82,8 +82,8 @@ fs.watchFile(datafile, function (curr, prev) {
  */
 function updateData(newData) {
 	data = {
-		current: newData,
-		previous: data.current
+		previous: data.current,
+		current: newData
 	};
 }
 

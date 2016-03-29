@@ -18,7 +18,7 @@
  */
 
 /** 
- * djShow v2.4.0
+ * djShow v2.4.1
  *
  * @param string container - идентификатор блока-контейнера
  * @param object options - дополнительные параметры
@@ -29,6 +29,11 @@ var djShow = function (container, options) {
 
 	if (!container) return;
 	container = document.getElementById(container);
+
+	if (!window.EventSource) {
+		container.innerHTML = '<h2>This browser is not supported</h2>';
+		return;
+	}
 
 	options = options || {};
 
