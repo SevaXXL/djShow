@@ -1,21 +1,26 @@
 /**
  * Child-process - Save playlist
+ * Скрипт при смене трека дописывает название и антиста в конец файла playlist.txt
  */
 
-const http = require('http'),
-        fs = require('fs');
+const http = require('http');
+const fs = require('fs');
 
+/**
+ * Запрос не закрывает соединение
+ */
 http.get({
 	hostname: 'localhost',
 	port: 80,
 	path: '/event'
 }, (responce) => {
 	responce.on('data', (data) => {
+		// Обрабатываем пакеты Server Side Events
+		// Сообщение с данными начинается с data:...
 		var message = 'data:';
 		if (data.indexOf(message) === 0) {
 			data = JSON.parse(data.toString('utf8', message.length));
 			data = getName('artist', data.current) + ' - ' + getName('title', data.current) + '\n';
-			// console.log(data);
 			fs.appendFile(__dirname + '/' + 'playlist.txt', data);
 		}
 	});
@@ -40,7 +45,7 @@ var getName = (needle, haystack) => {
 			regmatch = new RegExp(template[i], 'i');
 			result = haystack.match(regmatch);
 			if (result) {
-				return result[1].replace(/\(.+\)/, '').trim();
+				return result[1];
 			}
 		}
 	}
