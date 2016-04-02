@@ -17,9 +17,9 @@ http.get({
 	responce.on('data', (data) => {
 		// Обрабатываем пакеты Server Side Events
 		// Сообщение с данными начинается с data:...
-		var message = 'data:';
-		if (data.indexOf(message) === 0) {
-			data = JSON.parse(data.toString('utf8', message.length));
+		var messageName = 'data:';
+		if (data.indexOf(messageName) === 0) {
+			data = JSON.parse(data.toString('utf8', messageName.length));
 			data = getName('artist', data.current) + ' - ' + getName('title', data.current) + '\n';
 			fs.appendFile(__dirname + '/' + 'playlist.txt', data);
 		}
@@ -32,7 +32,7 @@ http.get({
  * @param string haystack - текст, в котором осуществляется поиск
  * return string || undefined - найденное значение
  */
-var getName = (needle, haystack) => {
+function getName(needle, haystack) {
 	var regmatch,
 		result,
 		template = [
@@ -49,4 +49,4 @@ var getName = (needle, haystack) => {
 			}
 		}
 	}
-};
+}
