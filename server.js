@@ -88,7 +88,7 @@ function updateData(newData) {
 }
 
 /**
- * Server-Sent Events (SSE)
+ * Server Side Events (SSE)
  * @param object request
  * @param object response
  */
