@@ -1,6 +1,6 @@
 /**
  * Child-process - Save playlist
- * Скрипт при смене трека дописывает название и антиста в конец файла playlist.txt
+ * Скрипт при смене трека дописывает данные в конец файла playlist.txt
  */
 
 const http = require('http');
