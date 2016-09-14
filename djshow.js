@@ -18,7 +18,7 @@
  */
 
 /** 
- * djShow v2.4.1
+ * djShow v2.5.0
  *
  * @param string container - идентификатор блока-контейнера
  * @param object options - дополнительные параметры
@@ -29,11 +29,6 @@ var djShow = function (container, options) {
 
 	if (!container) return;
 	container = document.getElementById(container);
-
-	if (!window.EventSource) {
-		container.innerHTML = '<h2>This browser is not supported</h2>';
-		return;
-	}
 
 	options = options || {};
 
@@ -98,13 +93,21 @@ var djShow = function (container, options) {
 		}
 	};
 
+
 	/**
 	 * Обработчик сообщения от сервера
 	 * @param string event
 	 */
-	var parseMessage = function (event) {
+	var parseEvent = function (event) {
+		parseMessage(JSON.parse(event.data));
+	}
 
-		var data = JSON.parse(event.data);
+	/**
+	 * Обработчик сообщения
+	 * @param string data
+	 */
+	var parseMessage = function (data) {
+
 		var html = '';
 
 		if (container.innerHTML !== '') {
@@ -162,8 +165,29 @@ var djShow = function (container, options) {
 	 * Перед вызовом EventSource все http-запросы должны быть завершены
 	 */
 	window.onload = function () {
-		var eventSource = new EventSource('/event');
-		eventSource.onmessage = parseMessage;
-		eventSource.onerror = parseError;
+		if (window.EventSource) {
+			var eventSource = new EventSource('/event');
+			eventSource.onmessage = parseEvent;
+			eventSource.onerror = parseError;
+		} else {
+			var XHR = ('onload' in new XMLHttpRequest()) ? XMLHttpRequest : XDomainRequest;
+			var xhr = new XHR(),
+				url = '/NowPlaying.txt',
+				current = '';
+			xhr.onreadystatechange = function () {
+				if (this.readyState == 4 && this.status == 200) {
+					if (current != this.responseText) {
+						current = this.responseText;
+						parseMessage({ current: current });
+					}
+					setTimeout(function () {
+						xhr.open('GET', url + '?key=' + Math.random(), true);
+						xhr.send();
+					}, 10000);
+				}
+			};
+			xhr.open('GET', url + '?key=' + Math.random(), true);
+			xhr.send();
+		}
 	};
 };

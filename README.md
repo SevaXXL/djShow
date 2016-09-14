@@ -18,18 +18,18 @@
 - Для **Aimp** необходим плагин Current track info to file - [инструкция](https://github.com/SevaXXL/djShow/wiki/Export-from-Aimp)
 - Для **Foobar2000** - плагин Now Playing Simple - [инструкция](https://github.com/SevaXXL/djShow/wiki/Export-from-Foobar2000)
 - Для **MusicBee** - плагин Now Playing to External Files - [инструкция](https://github.com/SevaXXL/djShow/wiki/Export-from-MusicBee)
-- Для **iTunes, Winamp** и **Windows Media Player** существует несколько решений - уточните в группе проекта.
-- Для **Traktor** - скрипт icecast.js в папке scripts - [инструкция](https://github.com/SevaXXL/djShow/wiki/Export-from-Traktor).
+- Для **iTunes, Winamp** и **Windows Media Player** существует несколько решений - уточните в группе проекта
+- Для **Traktor** - скрипт icecast.js в папке scripts - [инструкция](https://github.com/SevaXXL/djShow/wiki/Export-from-Traktor)
 
 Под Mac:
-- Для **iTunes, Swinsian** и **VOX** данные в файл экспортируют соответствующие apple-скрипты из папки scripts.
+- Для **iTunes, Swinsian** и **VOX** данные в файл экспортируют соответствующие apple-скрипты из папки scripts
 - В плейере **Djay** файл NowPlaying.txt создается автоматически и лежит в папке ~/Music/djay
 - Для **Traktor** под Mac [инструкция](https://github.com/SevaXXL/djShow/wiki/Export-from-Traktor) такая же, как и под Windows
 
 Под Linux
-- Для **Audacious** достаточно [прописать команду](https://github.com/SevaXXL/djShow/wiki/Export-from-Audacious) в настройках.
-- Для **Clementine** и **Deadbeef** необходимо [запустить соответствующий скрипт](https://github.com/SevaXXL/djShow/wiki/Child-process) в папке scripts.
-- Для **Rhythmbox** - плагин в папке scripts.
+- Для **Audacious** достаточно [прописать команду](https://github.com/SevaXXL/djShow/wiki/Export-from-Audacious) в настройках
+- Для **Clementine** и **Deadbeef** необходимо [запустить соответствующий скрипт](https://github.com/SevaXXL/djShow/wiki/Child-process) в папке scripts
+- Для **Rhythmbox** - плагин в папке scripts
 
 ### Шаг 2. Копируем файлы и включаем мини-сервер
 
@@ -50,6 +50,8 @@
 
 
 ## Версии
+
+2.5.x - Поддержка Windows Phone и старых браузеров.
 
 2.4.x - Возможность подключения внешних модулей в работе сервера.
 

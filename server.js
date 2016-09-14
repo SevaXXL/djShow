@@ -17,7 +17,7 @@
  *  along with djShow. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var version  = '2.4.1',
+var version  = '2.5.0',
 	datafile = __dirname + '/' + 'NowPlaying.txt';
 
 var fs    = require('fs'),
