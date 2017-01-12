@@ -5,7 +5,7 @@
 const fs = require('fs');
 const iconv = require('./iconv-lite/lib/index');
 
-var datafile = __dirname + '/' + 'NowPlayingWinamp.txt',
+var datafile = __dirname + '/' + 'decode.txt',
 	encoding  = 'win1251';
 
 /**
