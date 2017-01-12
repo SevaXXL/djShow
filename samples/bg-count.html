@@ -91,6 +91,10 @@
 			 * Смена фона через каждые n песен (указывается в count.max)
 			 * Ссылки на изображения для фона указываются в images
 			 */
+			var time = {
+				start: Date.now(),
+				reload: 3600000
+			};
 			var count = {
 				slide: 0,
 				background: 0,
@@ -112,6 +116,9 @@
 					}
 				},
 				sunrise: function (action) {
+					if (time.start + time.reload < Date.now()) {
+						location.reload();
+					}
 					if (action) {
 						count.background++;
 						if (count.background >= images.length) {

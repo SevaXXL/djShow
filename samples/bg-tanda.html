@@ -92,6 +92,12 @@
 			 * Плейер должен экспортировать дополнительный праметр <genre>...
 			 * ...и добавлены изображения для фона
 			 */
+
+			var time = {
+				start: Date.now(),
+				reload: 3600000
+			};
+
 			djShow('container', {
 				preload: [
 					'milonga.jpg',
@@ -130,6 +136,9 @@
 					return genre;
 				},
 				sunrise: function (genre) {
+					if (time.start + time.reload < Date.now()) {
+						location.reload();
+					}
 					if (genre.current !== genre.previous || genre.first) {
 						document.body.style.backgroundImage = 'url(' + genre.current + '.jpg)';
 						document.getElementById('shade').style.opacity = '0';
