@@ -31,15 +31,14 @@ function mainLoop() {
           if (currentTrackID && currentTrackID !== previousTrackID) {
             previousTrackID = currentTrackID;
             process.send('Title: ' + getTag('Name', currentTrack) + '\nArtist: ' + getTag('Artist', currentTrack));
-            // console.log('Titile: ' + getTag('Name', currentTrack) + '\nArtist: ' + getTag('Artist', currentTrack));
           }
         }
       });
     }
-  }).on('error', (e) => {
+  }).on('error', function(e) {
     console.log(`Got error: ${e.message}`);
   });
-  setTimeout(mainLoop, 4000);
+  setTimeout(mainLoop, 8000);
 }
 
 mainLoop();
