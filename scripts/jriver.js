@@ -36,7 +36,9 @@ function mainLoop() {
         }
       });
     }
-  });
+  }).on('error', (e) => {
+    console.log(`Got error: ${e.message}`);
+  });;
   setTimeout(mainLoop, 4000);
 }
 
