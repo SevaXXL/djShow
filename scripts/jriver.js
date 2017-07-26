@@ -1,5 +1,5 @@
 /**
- * Child-process - icecast-сервер
+ * Child-process - jRiver
  */
 
 var http = require('http');
@@ -17,7 +17,7 @@ function getTag(needle, haystack) {
 }
 
 function mainLoop() {
-  http.get('http://localhost:52199/MCWS/v1/Playback/Info', function(res) {
+  http.get('http://127.0.0.1:52199/MCWS/v1/Playback/Info', function(res) {
     if (res.statusCode == 200) {
       res.setEncoding('utf8');
       var data = '';
