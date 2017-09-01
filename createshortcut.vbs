@@ -12,7 +12,7 @@ Sub CreateDesktop()
 	If PArch <> "x86" Then PArch = "x64"
 	Set LinkDesktop = WshShell.CreateShortcut(DPath & "\djShow.lnk")
 	With LinkDesktop
-		.Arguments = TPath & "\server 8888"
+		.Arguments = TPath & """\server.js 8888"""
 		.IconLocation = WshShell.ExpandEnvironmentStrings(TPath & "\favicon.ico")
 		.TargetPath = WshShell.ExpandEnvironmentStrings(TPath & "\nodejs\" & PArch & "\node.exe")
 		.WindowStyle = 1
