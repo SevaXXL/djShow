@@ -15,7 +15,7 @@ Sub CreateDesktop()
 		.Arguments = TPath & "\server 8888"
 		.IconLocation = WshShell.ExpandEnvironmentStrings(TPath & "\djshow.ico")
 		.TargetPath = WshShell.ExpandEnvironmentStrings(TPath & "\nodejs\" & PArch & "\node.exe")
-		.WindowStyle = 4
+		.WindowStyle = 1
 		.WorkingDirectory = WshShell.ExpandEnvironmentStrings(TPath)
 		.Save()
 	End With
