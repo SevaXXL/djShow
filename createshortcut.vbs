@@ -2,18 +2,18 @@
 ' wscript_shell_CreateShortcut                         '
 '******************************************************'
 Option Explicit
-dim WshShell
-set WshShell = WScript.CreateObject("WScript.Shell")
+Dim WshShell
+Set WshShell = WScript.CreateObject("WScript.Shell")
 Sub CreateDesktop()
-	dim DPath, TPath, PArch, LinkDesktop
+	Dim DPath, TPath, PArch, LinkDesktop
 	DPath = WshShell.SpecialFolders("Desktop")
 	TPath = WshShell.CurrentDirectory
 	PArch = WshShell.Environment("SYSTEM").Item("PROCESSOR_ARCHITECTURE")
-	if not PArch = "x86" then PArch = "x64" end if
+	If PArch <> "x86" Then PArch = "x64"
 	set LinkDesktop = WshShell.CreateShortcut(DPath & "\djShow.lnk")
 	With LinkDesktop
 		.Arguments = TPath & "\server 8888"
-		.IconLocation = WshShell.ExpandEnvironmentStrings(TPath & "\djshow.ico")
+		.IconLocation = WshShell.ExpandEnvironmentStrings(TPath & "\favicon.ico")
 		.TargetPath = WshShell.ExpandEnvironmentStrings(TPath & "\nodejs\" & PArch & "\node.exe")
 		.WindowStyle = 1
 		.WorkingDirectory = WshShell.ExpandEnvironmentStrings(TPath)
