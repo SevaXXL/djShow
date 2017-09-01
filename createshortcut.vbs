@@ -10,7 +10,7 @@ Sub CreateDesktop()
 	TPath = WshShell.CurrentDirectory
 	PArch = WshShell.Environment("SYSTEM").Item("PROCESSOR_ARCHITECTURE")
 	If PArch <> "x86" Then PArch = "x64"
-	set LinkDesktop = WshShell.CreateShortcut(DPath & "\djShow.lnk")
+	Set LinkDesktop = WshShell.CreateShortcut(DPath & "\djShow.lnk")
 	With LinkDesktop
 		.Arguments = TPath & "\server 8888"
 		.IconLocation = WshShell.ExpandEnvironmentStrings(TPath & "\favicon.ico")
@@ -21,4 +21,4 @@ Sub CreateDesktop()
 	End With
 End Sub
 Call CreateDesktop
-MsgBox "Shortcut created on Desktop"
+MsgBox "Shortcut is created on Desktop"
