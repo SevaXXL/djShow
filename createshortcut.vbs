@@ -1,6 +1,6 @@
-'******************************************************'
-' wscript_shell_CreateShortcut                         '
-'******************************************************'
+'******************************************************
+' wscript_shell_CreateShortcut
+'******************************************************
 Option Explicit
 Dim WshShell
 Set WshShell = WScript.CreateObject("WScript.Shell")
