@@ -17,19 +17,18 @@
  *  along with djShow. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var version  = '2.5.0',
-	datafile = __dirname + '/' + 'NowPlaying.txt';
-
-var fs    = require('fs'),
-	http  = require('http'),
-	path  = require('path'),
-	parse = require('url').parse,
-	net   = require('os').networkInterfaces(),
-	data  = { current: getDatafile() },
-	port  = 80,
-	users = [],
-	child = [],
-	fork;
+var version  = '2.5.1';
+var fs    = require('fs');
+var http  = require('http');
+var path  = require('path');
+var parse = require('url').parse;
+var net   = require('os').networkInterfaces();
+var datafile = __dirname + path.sep + 'NowPlaying.txt';
+var data  = { current: getDatafile() };
+var port  = 80;
+var users = [];
+var child = [];
+var fork;
 
 /**
  * Обрабатываем дополнительно переданные параметры
@@ -41,7 +40,7 @@ for (var i = 2; i < process.argv.length; i++) {
 	} else {
 		console.log('Include ' + process.argv[i]);
 		fork = fork || require('child_process').fork;
-		child[i] = fork(__dirname + '/' + process.argv[i]);
+		child[i] = fork(__dirname + path.sep + process.argv[i]);
 		child[i].on('message', function (newData) {
 			updateData(newData);
 			sendData();
