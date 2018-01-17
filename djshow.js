@@ -1,5 +1,5 @@
 /**
- *  Copyright (C) 2015-2016 Aleksandr Deinega <adeinega@mail.ru>
+ *  Copyright (C) 2015-2018 Aleksandr Deinega <adeinega@mail.ru>
  *
  *  This file is part of djShow.
  *
@@ -18,7 +18,7 @@
  */
 
 /** 
- * djShow v2.5.1
+ * djShow v2.6.0
  *
  * @param string container - идентификатор блока-контейнера
  * @param object options - дополнительные параметры
