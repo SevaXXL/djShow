@@ -10,9 +10,9 @@
 
 ## Поддерживаемые плейеры
 
-**Linux:** Audacious, Clementine, DeadBeef, JRiver, Mixxx, Rhythmbox.
-**MacOS:** Djay, Embrace, JRiver, iTunes, Mixxx, Swinsian, Traktor, VOX.
-**Windows:** Aimp, JRiver, iTunes, Foobar2000, Mixxx, MusicBee, Traktor, Winamp, Windows media player.
+- **Linux:** Audacious, Clementine, DeadBeef, JRiver, Mixxx, Rhythmbox.
+- **MacOS:** Djay, Embrace, JRiver, iTunes, Mixxx, Swinsian, Traktor, VOX.
+- **Windows:** Aimp, JRiver, iTunes, Foobar2000, Mixxx, MusicBee, Traktor, Winamp, Windows media player.
 
 
 ## Пошаговая инструкция
@@ -21,12 +21,16 @@
 
 Пользователи Windows могут скачать самораспаковывающийся архив, при запуске которого на рабочем столе создается ссылка на программу.
 
-Пользователям Linux и MacOS необходимо установить NodeJS с официального сайта http://nodejs.org в минимальной комплектации и скачать скрипт программы. Для этого можно нажать на ссылку `Download ZIP` или выполнить команду в терминале:
+Пользователям Linux и MacOS необходимо установить NodeJS с официального сайта http://nodejs.org в минимальной комплектации и скачать скрипт программы. Для этого можно нажать на ссылку `Download ZIP` вверху справа или выполнить команду в терминале:
 
-	cd ~/Downloads && curl -L -O https://github.com/SevaXXL/djShow/archive/master.zip && unzip master.zip && rm master.zip && mv djShow-master ~/djShow
+	cd ~/Downloads
+	&& curl -L -O https://github.com/SevaXXL/djShow/archive/master.zip
+	&& unzip master.zip
+	&& rm master.zip
+	&& mv djShow-master ~/djShow
 С помощью NodeJS запускаем скрипт `server.js`:
 - Windows - ярлык на рабочем столе;
-- Mac и Linux - в терминале переходим к текущей папке и пишем: `$ node server 8888`.
+- Mac и Linux - в терминале переходим к текущей папке и пишем: `node server 8888`.
 
 На этом этапе сервер уже работает по адресу: http://127.0.0.1:8888. Можно открыть эту страницу в браузере и подключить второй экран или проектор. При изменении файла `NowPlaying.txt` будет менятся и отображение.
 
