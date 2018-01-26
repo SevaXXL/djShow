@@ -17,7 +17,7 @@
  *  along with djShow. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var version = '2.6.0';
+var version = '2.6.1';
 
 var fs    = require('fs');
 var http  = require('http');
@@ -28,8 +28,19 @@ var port  = 80;
 var data  = {};
 var users = [];
 var child = [];
-var fork;
 var datafile = __dirname + path.sep + 'NowPlaying.txt';
+
+/**
+ * Обрабатываем дополнительно переданные параметры
+ * node server.js 8888 param ... param
+ */
+for (var i = process.argv.length - 1; i >= 2; i--) {
+  if (/^\d+$/.test(process.argv[i])) {
+    port = +process.argv[i];
+  } else {
+    child.push(process.argv[i]);
+  }
+}
 
 /**
  * Начальные данные берем из файла datafile
@@ -54,28 +65,26 @@ fs.readFile(datafile, 'utf8', function(error, newData) {
       }).resume();
     }).listen(port, function () {
       var adress = getIP() + ((port == 80) ? '' : ':' + port);
-      console.log('*** djShow *** running at http://' + adress + '\nCtrl+C to exit...');
+      console.log('*** djShow *** running at http://' + adress);
+      /**
+       * Запускаем дополнительно переданные параметры
+       * node server.js param param ... param
+       */
+      if (child.length) {
+        var fork = require('child_process').fork;
+        for (var j = child.length - 1; j >= 0; j--) {
+          console.log('Include ' + child[j]);
+          child[j] = fork(__dirname + path.sep + child[j]);
+          child[j].on('message', function(newData) {
+            updateData(newData);
+            sendData();
+          });
+        }
+      }
+      console.log('Ctrl+C to exit...');
     });
   }
 });
-
-/**
- * Обрабатываем дополнительно переданные параметры
- * node server.js param param ... param
- */
-for (var i = 2; i < process.argv.length; i++) {
-  if (/^\d+$/.test(process.argv[i])) {
-    port = +process.argv[i];
-  } else {
-    console.log('Include ' + process.argv[i]);
-    fork = fork || require('child_process').fork;
-    child[i] = fork(__dirname + path.sep + process.argv[i]);
-    child[i].on('message', function(newData) {
-      updateData(newData);
-      sendData();
-    });
-  }
-}
 
 /**
  * Реагируем на изменение datafile
@@ -132,7 +141,7 @@ function sendSSE(request, response) {
  */
 function sendData(username) {
   var message = 'data: ' + JSON.stringify(data) + '\n\n';
-  message = Buffer.from(message, 'utf8');
+  // message = Buffer.from(message, 'utf8');
   if (typeof username === 'undefined') {
     users.forEach(function (user) {
       user.write(message);
