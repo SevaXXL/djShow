@@ -23,7 +23,8 @@
 
 Пользователям Linux и MacOS необходимо установить NodeJS с официального сайта http://nodejs.org в минимальной комплектации и скачать скрипт программы. Для скачивания можно нажать на ссылку `Download ZIP` вверху справа или выполнить команду в терминале, которая разархивирует скрипт в папку ~/djShow:
 
-    cd ~/Downloads && curl -L -O https://github.com/SevaXXL/djShow/archive/master.zip && unzip master.zip && rm master.zip && mv djShow-master ~/djShow
+`cd ~/Downloads && curl -L -O https://github.com/SevaXXL/djShow/archive/master.zip && unzip master.zip && rm master.zip && mv djShow-master ~/djShow`
+
 Запускаем скрипт `server.js`:
 - Windows - startx86.bat или start_x64.bat для 64-разрфдной Windows. Для удобства можно создать ярлык на рабочий стол, запустив сценарий createshortcut.vbs;
 - Mac и Linux - в терминале переходим к папке скрипта, например `cd ~/djShow` и пишем: `node server 8888`.
