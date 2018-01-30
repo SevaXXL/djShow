@@ -26,7 +26,7 @@
 `cd ~/Downloads && curl -L -O https://github.com/SevaXXL/djShow/archive/master.zip && unzip master.zip && rm master.zip && mv djShow-master ~/djShow`
 
 Запускаем скрипт `server.js`:
-- Windows - startx86.bat или start_x64.bat для 64-разрфдной Windows. Для удобства можно создать ярлык на рабочий стол, запустив сценарий createshortcut.vbs;
+- Windows - startx86.bat или start_x64.bat для 64-разрядной Windows. Для удобства можно создать ярлык на рабочий стол, запустив сценарий createshortcut.vbs;
 - Mac и Linux - в терминале переходим к папке скрипта, например `cd ~/djShow` и пишем: `node server 8888`.
 
 На этом этапе сервер уже работает по адресу: http://127.0.0.1:8888. Можно открыть эту страницу в браузере и подключить второй экран или проектор. При изменении файла `NowPlaying.txt` будет менятся и отображение.
