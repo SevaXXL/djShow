@@ -12,7 +12,7 @@
 
 - **Linux:** Audacious, Clementine, DeadBeef, JRiver, Mixxx, Rhythmbox.
 - **MacOS:** Djay, Embrace, JRiver, iTunes, Mixxx, Swinsian, Traktor, VOX.
-- **Windows:** Aimp, JRiver, iTunes, Foobar2000, Mixxx, MusicBee, Traktor, Winamp, Windows media player.
+- **Windows:** Aimp, JRiver, iTunes, Foobar2000, MediaMonkey, Mixxx, MusicBee, Traktor, Winamp, Windows media player.
 
 
 ## Пошаговая инструкция
@@ -48,11 +48,13 @@
 Под Mac:
 - Для **Embrace, iTunes, Swinsian** и **VOX** данные в файл экспортируют соответствующие apple-скрипты из папки scripts
 - В плейере **Djay** файл NowPlaying.txt создается автоматически и лежит в папке ~/Music/djay
+- Для **Mixxx** - скрипт icecast.js в папке scripts
 - Для **Traktor** под Mac [инструкция](https://github.com/SevaXXL/djShow/wiki/Export-from-Traktor) такая же, как и под Windows
 
 Под Linux
 - Для **Audacious** достаточно [прописать команду](https://github.com/SevaXXL/djShow/wiki/Export-from-Audacious) в настройках
 - Для **Clementine** и **Deadbeef** необходимо [запустить соответствующий скрипт](https://github.com/SevaXXL/djShow/wiki/Child-process) в папке scripts
+- Для **Mixxx** - скрипт icecast.js в папке scripts
 - Для **Rhythmbox** - плагин в папке scripts
 
 
