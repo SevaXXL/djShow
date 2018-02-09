@@ -39,6 +39,8 @@
 Протестированные решения под Windows:
 - Для **Aimp** необходим плагин Current track info to file - [инструкция](https://github.com/SevaXXL/djShow/wiki/Export-from-Aimp)
 - Для **Foobar2000** - плагин Now Playing Simple - [инструкция](https://github.com/SevaXXL/djShow/wiki/Export-from-Foobar2000)
+- Для **MediaMonkey** - скрипт OutputTextFile.vbs - [инструкция](https://github.com/SevaXXL/djShow/wiki/Export-from-MediaMonkey)
+- Для **Mixxx** - скрипт icecast.js в папке scripts
 - Для **MusicBee** - плагин Now Playing to External Files - [инструкция](https://github.com/SevaXXL/djShow/wiki/Export-from-MusicBee)
 - Для **iTunes, Winamp** и **Windows Media Player** существует несколько решений - уточните в группе проекта
 - Для **Traktor** - скрипт icecast.js в папке scripts - [инструкция](https://github.com/SevaXXL/djShow/wiki/Export-from-Traktor)
