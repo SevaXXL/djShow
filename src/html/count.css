@@ -1,0 +1,25 @@
+body {
+  margin: 0;
+  padding: 0;
+  color: #fff;
+  font-size: 5vmin;
+  background-image: url(background.jpg);
+  background-attachment: fixed;
+  background-size: cover;
+  background-color: black;
+}
+#container {
+  text-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  transition: opacity 3s ease;
+  font-family: 'Barlow Condensed', serif;
+  font-weight: 700;
+  font-style: normal;
+  font-size: 90vh;
+  text-align: center;
+  line-height: 1em;
+}
+svg {
+  height: 30rem;
+  width: auto;
+  max-width: 10rem;
+}

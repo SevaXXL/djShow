@@ -1,0 +1,84 @@
+.hide {
+  display: none;
+}
+h4 {
+  font-size: 2em;
+}
+.settings {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  min-height: 100vh;
+  font-size: 20px;
+  color: #222;
+  line-height: 1em;
+  font-family: "Istok Web", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  padding: 0;
+  background-color: #f9f9f9;
+  z-index: 4;
+}
+.settings-content {
+  margin: 0 0 10rem 6rem;
+  max-width: 600px;
+}
+.back {
+  margin: 2rem 0 1rem;
+  cursor: pointer;
+}
+.back::before {
+  content: url(arrow.svg);
+  display: block;
+  width: 86px;
+  height: 86px;
+}
+section {
+  margin-bottom: 2rem;
+}
+ol {
+  padding-left: 1rem;
+}
+.small {
+  font-size: 12px;
+  line-height: 1.2em;
+}
+sup {
+  font-size: .46em;
+}
+.checkbox-wrapper {
+  margin: 6px 0;
+}
+input[type=text] {
+  padding: 8px 16px;
+  margin: 0 0 8px;
+  box-sizing: border-box;
+  font-size: 1.2rem;
+  width: 98%;
+}
+fieldset {
+  margin: 2rem 0 1rem;
+}
+@media (max-width: 640px) {
+  .settings {
+    font-size: 16px;
+  }
+  .settings-content {
+    margin-left: 0rem;
+  }
+  .back {
+    margin: 2rem 0 0 1rem;
+  }
+  section {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+  .checkbox-wrapper {
+    margin: 16px 0;
+  }
+  .small {
+    margin: 0 1rem 1rem;
+    font-size: 11px;
+  }
+}

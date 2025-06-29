@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<title>djShow</title>
+		<meta name="viewport" content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=yes">
+		<meta name="mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-title" content="djShow">
+		<meta name="application-name" content="djShow">
+		<meta name="format-detection" content="phone=no">
+		<meta name="apple-touch-fullscreen" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<meta name="theme-color" content="black">
+		<meta http-equiv="x-ua-compatible" content="ie=edge">
+		<link rel="icon" href="favicon.svg" type="image/svg+xml">
+		<link rel="preload" href="/background.jpg" as="image" type="image/jpeg">
+		<link rel="preload" href="/fonts/barlowcondensed.woff2" as="font" type="font/woff2" crossorigin>
+		<link rel="preload" href="/fonts/merriweather-italic.woff2" as="font" type="font/woff2" crossorigin>
+		<link rel="preload" href="/fonts/merriweather-bold-italic.woff2" as="font" type="font/woff2" crossorigin>
+		<link rel="preload" href="/fonts/merriweather-bold.woff2" as="font" type="font/woff2" crossorigin>
+		<link rel="preload" href="/fonts/istokweb.woff2" as="font" type="font/woff2" crossorigin>
+		<link rel="apple-touch-icon" href="app.png">
+		<link rel="stylesheet" href="fonts.css">
+		<link rel="stylesheet" href="index.css">
+		<link rel="stylesheet" href="settings.css">
+	</head>
+	<body>
+		<div class="gear hide" id="settingsBtn"></div>
+		<div id="container"></div>
+		<!-- Настройки держим в этом же окне, дабы в iOs работало как SPA -->
+		<div class="settings hide" id="settings">
+	    <div class="settings-content">
+	      <div class="back" id="backBtn"></div>
+	      <section>
+	        <form>
+	          <h4 data-ru="Настройки">Settings</h4>
+	          <div class="text-wrapper">
+	            <input type="text" id="textPrevious" name="textPrevious" placeholder="Previous">
+	            <input type="text" id="textNextTanda" name="textNextTanda" placeholder="Next tanda">
+	          </div>
+	           <div class="checkbox-wrapper">
+	            <input type="checkbox" id="showCount" name="showCount">
+	            <label for="showCount" data-ru="Показать счетчик песен в танде">Show the song counter in tanda</label><sup> 1</sup>
+	          </div>
+	           <div class="checkbox-wrapper">
+	            <input type="checkbox" id="showReverseCount" name="showReverseCount">
+	            <label for="showReverseCount" data-ru="Показать обратный счетчик">Show the reverse counter</label><sup> 2</sup>
+	          </div>
+	           <div class="checkbox-wrapper">
+	            <input type="checkbox" id="showImage" name="showImage">
+	            <label for="showImage" data-ru="Показать изображение">Show image</label>
+	          </div>
+	           <div class="checkbox-wrapper">
+	            <input type="checkbox" id="showYear" name="showYear">
+	            <label for="showYear" data-ru="Показать год">Show year</label>
+	          </div>
+	          <div class="checkbox-wrapper">
+	            <input type="checkbox" id="showNextTanda" name="showNextTanda">
+	            <label for="showNextTanda" data-ru="Показать следующую танду">Show next tanda</label><sup> 2</sup>
+	          </div>
+						<fieldset>
+					  	<legend data-ru="Объявлять кортину">Announce a cortina</legend>
+					  	<div class="checkbox-wrapper">
+						    <input type="radio" name="showCortina" value="genreIsCortina" id="genreIsCortina">
+					  		<label for="genreIsCortina" data-ru="если жанр Cortina">if genre is Cortina</label>
+					    </div>
+					  	<div class="checkbox-wrapper">
+						    <input type="radio" name="showCortina" value="genreIsNotTVM" id="genreIsNotTVM">
+					  		<label for="genreIsNotTVM" data-ru="если жанр не TVM">if genre is not TVM</label>
+					    </div>
+					  	<div class="checkbox-wrapper">
+						    <input type="radio" name="showCortina" value="off" id="off">
+					  		<label for="off" data-ru="не объявлять кортину">don't announce cortina</label>
+					    </div>
+						</fieldset>
+
+	           <div class="checkbox-wrapper">
+	            <input type="checkbox" id="highContrast" name="highContrast">
+	            <label for="highContrast" data-ru="Высокий контраст">High contrast</label>
+	          </div>
+	        </form>
+	      </section>
+        <ol class="small">
+        	<li>
+        		<span data-ru="Считает подряд идущие жанры Tango, Vals или Milonga (Milongon, Candombe, Foxtrot).">Counts consecutive genres Tango, Vals or Milonga (Milongon, Candombe, Foxtrot).</span><br>
+      			<span data-ru="Счетчик для экрана телефона">A counter for the phone screen</span>
+      			<a href="/count.html">count.html</a>
+      		</li>
+        	<li>
+        		<span data-ru="При наличии соответствующих данных">If data available</span>
+        	</li>
+        </ol>
+	    </div>
+    </div>
+		<script src="index.js"></script>
+	</body>
+</html>
