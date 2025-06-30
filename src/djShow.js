@@ -16,7 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with djShow. If not, see <http://www.gnu.org/licenses/>.
  */
-const version = '4.1.4';
+const version = '4.1.5';
 const port = 3000;
 
 const http = require('node:http');
@@ -74,7 +74,7 @@ const djShow = {
       }
       // Find first track in next tanda
       for (i; i < data.next.length; i++) {
-        if (this._tandas.includes(data.next[i].genre.toLowerCase())) break;
+        if (this._tandas.includes(data.next[i].genre?.toLowerCase())) break;
       }
       if (i < data.next.length) {
         this._nextGenre = data.next[i].genre || '';
