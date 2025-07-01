@@ -1,8 +1,0 @@
-[Plugin]
-Loader=python3
-Module=nowplaying
-IAge=2
-Name=Now Playing
-Description=Save nowplying info to file 
-Authors=Aleksandr Deinega <adeinega@mail.ru>
-Aleksandr=Deinega Copyright, GPL v3

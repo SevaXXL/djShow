@@ -20,7 +20,6 @@ const version = '4.1.5';
 const port = 3000;
 
 const http = require('node:http');
-const url = require('node:url');
 const path  = require('node:path');
 const { spawn } = require('node:child_process');
 const { networkInterfaces, EOL } = require('node:os');
@@ -108,19 +107,19 @@ const djShow = {
  * Start server
  */
 http.createServer(async (req, res) => {
-  const uri = url.parse(req.url).pathname;
-  switch (uri) {
+  const url = new URL(req.url, `http://${req.headers.host}/`);
+  switch (url.pathname) {
     case '/event'  : sseInit(req, res); break;
     case '/data'   : receiveAndDeliverData(req, res); break;
     case '/traktor': traktor(req, res); break;
-    default        : await serveStatic(res, uri, htmlPath);
+    default        : await serveStatic(res, url.pathname, htmlPath);
   }
 }).listen(port, () => {
   const ip = getIP();
-  const url = `http://${ip}:${port}`;
-  if (ip !== 'localhost') console.log(qr(url));
+  const urlPathname = `http://${ip}:${port}`;
+  if (ip !== 'localhost') console.log(qr(urlPathname));
   console.log(`djShow v${version}`);
-  console.log(`Server running at ${url}`);
+  console.log(`Server running at ${urlPathname}`);
   
   /**
    * Start watch file only file present

@@ -1,1 +1,0 @@
-"C:\Program Files\nodejs\node.exe" server.js 8888
