@@ -16,8 +16,6 @@
  *  You should have received a copy of the GNU General Public License
  *  along with djShow. If not, see <http://www.gnu.org/licenses/>.
  */
-
-
 (function(){
 
   const exclude = [ '?', 'missing value', 'n/a', 'nothing', 'null', 'various artists' ]; // This value will not be displayed
@@ -51,6 +49,7 @@
     const coldStart = container.innerHTML == '' ? true : false;
     const regSeparator = /\/|\s-\s|:|&/g;
     const separator = '%sep%';
+    const imagePath = '/photos';
     if (!coldStart) {
       container.style.opacity = '0'; // Sunset
     }
@@ -115,32 +114,34 @@
     }
 
     // Background .jpg or photo face .webp or .png
-    if (!isCortina && config.showImage && current.artist) {
-      const imagePath = `/photos/${getUnixName(current.artist)}`;
-      const preloadJpeg = new Image();
-      preloadJpeg.src = imagePath + '.jpg';
-      preloadJpeg.onload = () => {
-        slideElement.style.backgroundImage = `url(${preloadJpeg.src})`;
-        slideElement.classList.add('image');
-      };
-      preloadJpeg.onerror = () => {
-        const preloadWebp = new Image();
-        preloadWebp.src = imagePath + '.webp';
-        preloadWebp.onload = () => {
-          preloadWebp.classList.add('photo');
-          slideElement.appendChild(preloadWebp);
+    if (config.showImage) {
+      if (isCortina || current.artist) {
+        const imageName = isCortina ? `${imagePath}/cortina` : `${imagePath}/${getUnixName(current.artist)}`;
+        const preloadJpeg = new Image();
+        preloadJpeg.src = imageName + '.jpg';
+        preloadJpeg.onload = () => {
+          slideElement.style.backgroundImage = `url(${preloadJpeg.src})`;
           slideElement.classList.add('image');
         };
-        preloadWebp.onerror = () => {
-          const preloadPng = new Image();
-          preloadPng.src = imagePath + '.png';
-          preloadPng.onload = () => {
-            preloadPng.classList.add('photo');
-            slideElement.appendChild(preloadPng);
+        preloadJpeg.onerror = () => {
+          const preloadWebp = new Image();
+          preloadWebp.src = imageName + '.webp';
+          preloadWebp.onload = () => {
+            preloadWebp.classList.add('photo');
+            slideElement.appendChild(preloadWebp);
             slideElement.classList.add('image');
           };
+          preloadWebp.onerror = () => {
+            const preloadPng = new Image();
+            preloadPng.src = imageName + '.png';
+            preloadPng.onload = () => {
+              preloadPng.classList.add('photo');
+              slideElement.appendChild(preloadPng);
+              slideElement.classList.add('image');
+            };
+          };
         };
-      };
+      }
     }
 
     // Title

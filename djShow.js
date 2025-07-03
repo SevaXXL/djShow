@@ -16,7 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with djShow. If not, see <http://www.gnu.org/licenses/>.
  */
-const version = '4.1.5';
+const version = '4.1.6';
 const port = 3000;
 
 const http = require('node:http');
@@ -37,8 +37,15 @@ const users = []; // SSE clients
 
 const djShow = {
   _tandas: ['tango', 'vals', 'milonga'],
-  _playlistTemplates: '%genre% - %artist% “%title%” %year%',
+  _playlistTemplates: '%genre% - %artist%: %title% %year%',
   _count: 0,
+  _getTVM: genre => {
+    // Жанры нужны только для счетчика позиции в танде
+    // Приводим подобные к одному виду
+    if (/milong.*|candombe|foxtrot/.test(genre?.toLowerCase())) return 'Milonga';
+    if (/tonada/.test(genre?.toLowerCase())) return 'Tango';
+    return genre || '';
+  },
   playlistState: 1,
   get track() {
     return {
@@ -46,7 +53,7 @@ const djShow = {
           previous: this._trackPrevious,
              count: this._count,
       reversecount: this._reverseCount,
-         nextgenre: this._nextGenre,
+         nextgenre: this._nextGenre, //.charAt(0).toUpperCase() + this._nextGenre.slice(1),
         nextartist: this._nextArtist
     };
   },
@@ -57,33 +64,31 @@ const djShow = {
       genre: this._trackCurrent?.genre || ''
     }
     this._trackCurrent = data.current || {};
-    if (this._trackCurrent.genre && /milong.n|candombe|foxtrot/.test(this._trackCurrent.genre.toLowerCase())) {
-      this._trackCurrent.genre = 'Milonga';
-    }
+    // this._trackCurrent.genre = this._getTVM(this._trackCurrent.genre);
     this._reverseCount = 0;
     this._nextGenre = '';
     this._nextArtist = '';
     if (data.next && data.next instanceof Array) {
       let i = 0;
-      let reverseCount = 0;
+      // let reverseCount = 0;
       // Find last track in current tanda
       for (i; i < data.next.length; i++) {
-        if (data.next[i].genre != this._trackCurrent.genre) break;
-        reverseCount++;
+        if (this._getTVM(data.next[i].genre).toLowerCase() != this._getTVM(this._trackCurrent.genre).toLowerCase()) break;
+        // reverseCount++;
+        this._reverseCount++;
       }
+
       // Find first track in next tanda
       for (i; i < data.next.length; i++) {
-        if (this._tandas.includes(data.next[i].genre?.toLowerCase())) break;
+        if (this._tandas.includes(this._getTVM(data.next[i].genre).toLowerCase())) break;
       }
       if (i < data.next.length) {
         this._nextGenre = data.next[i].genre || '';
         this._nextArtist = data.next[i].artist || '';
-        this._reverseCount = reverseCount;
       }
     }
-
-    if (this._trackCurrent.genre && this._tandas.includes(this._trackCurrent.genre.toLowerCase())) {
-      if (this._trackPrevious.genre && this._trackPrevious.genre.toLowerCase() == this._trackCurrent.genre.toLowerCase()) {
+    if (this._trackCurrent.genre && this._tandas.includes(this._getTVM(this._trackCurrent.genre).toLowerCase())) {
+      if (this._trackPrevious.genre && this._getTVM(this._trackPrevious.genre).toLowerCase() == this._getTVM(this._trackCurrent.genre).toLowerCase()) {
         this._count++;
       } else {
         this._count = 1;
