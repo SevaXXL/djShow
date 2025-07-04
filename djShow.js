@@ -36,24 +36,25 @@ const nowplayingFile = __dirname + path.sep + nowplayingName;
 const users = []; // SSE clients
 
 const djShow = {
+  playlistState: 1,
   _tandas: ['tango', 'vals', 'milonga'],
-  _playlistTemplates: '%genre% - %artist%: %title% %year%',
+  _playlistTemplates: '[%genre%] %artist% > %title% %year%',
   _count: 0,
   _getTVM: genre => {
-    // Жанры нужны только для счетчика позиции в танде
+    // Жанры нужны для счетчика позиции в танде
     // Приводим подобные к одному виду
-    if (/milong.*|candombe|foxtrot/.test(genre?.toLowerCase())) return 'Milonga';
-    if (/tonada/.test(genre?.toLowerCase())) return 'Tango';
+    if (/tango|tonada/.test(genre?.toLowerCase())) return 'Tango'; // Tango, Electrotango, Tango nuevo
+    if (/vals/.test(genre?.toLowerCase())) return 'Vals';
+    if (/milong|candombe|foxtrot/.test(genre?.toLowerCase())) return 'Milonga'; // Milongon
     return genre || '';
   },
-  playlistState: 1,
   get track() {
     return {
            current: this._trackCurrent,
           previous: this._trackPrevious,
              count: this._count,
       reversecount: this._reverseCount,
-         nextgenre: this._nextGenre, //.charAt(0).toUpperCase() + this._nextGenre.slice(1),
+         nextgenre: this._nextGenre,
         nextartist: this._nextArtist
     };
   },
@@ -64,17 +65,14 @@ const djShow = {
       genre: this._trackCurrent?.genre || ''
     }
     this._trackCurrent = data.current || {};
-    // this._trackCurrent.genre = this._getTVM(this._trackCurrent.genre);
     this._reverseCount = 0;
     this._nextGenre = '';
     this._nextArtist = '';
     if (data.next && data.next instanceof Array) {
       let i = 0;
-      // let reverseCount = 0;
       // Find last track in current tanda
       for (i; i < data.next.length; i++) {
         if (this._getTVM(data.next[i].genre).toLowerCase() != this._getTVM(this._trackCurrent.genre).toLowerCase()) break;
-        // reverseCount++;
         this._reverseCount++;
       }
 
@@ -125,7 +123,6 @@ http.createServer(async (req, res) => {
   if (ip !== 'localhost') console.log(qr(urlPathname));
   console.log(`djShow v${version}`);
   console.log(`Server running at ${urlPathname}`);
-  
   /**
    * Start watch file only file present
    */
