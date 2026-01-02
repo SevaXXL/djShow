@@ -103,10 +103,10 @@
 
     // Orchestra
     if (!isCortina && message.current && message.current.artist && !except(message.current.artist)) {
-      const currentArtist = message.current.artist.replace(/\(.*?\)/g, '').replace(regSeparator, separator).split(separator).map(el => el.trim());
+      const currentArtist = message.current.artist.replace(/\(.*?\)/g, '').replace(/\s+,/g, ',').replace(regSeparator, separator).split(separator).map(el => el.trim());
       current.artist = htmlEncode(currentArtist[0] || '');
       current.singer = htmlEncode(currentArtist[1] || '');
-      html.push(`<h1 class="artist">${current.artist.replace(/\s(..)\s(.+)/i, ' $1&nbsp;$2')}</h1>`); // Di Sarli
+      html.push(`<h1 class="artist">${current.artist.replace(/\s(..)\s(.+)/i, ' $1&nbsp;$2')}</h1>`); // Di Sarli -> Di&nbsp;Sarli
       // Singer
       if (current.singer) {
         html.push(`<h3 class="singer">${current.singer}</h3>`);
@@ -204,7 +204,7 @@
     function getUnixName(artist) {
       const espChars = [['á','a'],['é','e'],['í','i'],['ñ','n'],['ó','o'],['ú','u'],['ü','u']];
       artist = artist.toString().trim().toLowerCase().replace(/\s+/g, '_');
-      for ([esp, latin] of espChars) {
+      for (const [esp, latin] of espChars) {
         const espReg = new RegExp(esp, 'g');
         artist = artist.replace(espReg, latin);
       }

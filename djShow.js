@@ -16,7 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with djShow. If not, see <http://www.gnu.org/licenses/>.
  */
-const version = '4.1.6';
+const version = '4.1.7';
 const port = 3000;
 
 const http = require('node:http');
@@ -43,9 +43,9 @@ const djShow = {
   _getTVM: genre => {
     // Жанры нужны для счетчика позиции в танде
     // Приводим подобные к одному виду
+    if (/vals/.test(genre?.toLowerCase())) return 'Vals'; // Vals, Tango vals
+    if (/milong|candombe|foxtrot/.test(genre?.toLowerCase())) return 'Milonga'; // Milonga, Milongon, Tango milonga
     if (/tango|tonada/.test(genre?.toLowerCase())) return 'Tango'; // Tango, Electrotango, Tango nuevo
-    if (/vals/.test(genre?.toLowerCase())) return 'Vals';
-    if (/milong|candombe|foxtrot/.test(genre?.toLowerCase())) return 'Milonga'; // Milongon
     return genre || '';
   },
   get track() {
@@ -320,7 +320,7 @@ function getIP() {
   for (let key in interfaces) {
     let item = interfaces[key];
     for (let k in item) {
-      if (item[k].family === 'IPv4' && !item[k].internal) {
+      if (item[k].family === 'IPv4' && !item[k].internal && item[k].mac !== '00:00:00:00:00:00') {
         return item[k].address;
       }
     }
