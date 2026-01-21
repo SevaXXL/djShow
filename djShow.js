@@ -1,5 +1,5 @@
 /**
- *  Copyright (c) 2015-2025 Aleksandr Deinega <adeinega@mail.ru>
+ *  Copyright (c) 2015-2026 Aleksandr Deinega <adeinega@mail.ru>
  *
  *  This file is part of djShow.
  *
@@ -16,7 +16,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with djShow. If not, see <http://www.gnu.org/licenses/>.
  */
-const version = '4.1.7';
+const version = '4.2.0';
 const port = 3000;
 
 const http = require('node:http');
@@ -114,7 +114,6 @@ http.createServer(async (req, res) => {
   switch (url.pathname) {
     case '/event'  : sseInit(req, res); break;
     case '/data'   : receiveAndDeliverData(req, res); break;
-    case '/traktor': traktor(req, res); break;
     default        : await serveStatic(res, url.pathname, htmlPath);
   }
 }).listen(port, () => {
@@ -122,7 +121,11 @@ http.createServer(async (req, res) => {
   const urlPathname = `http://${ip}:${port}`;
   if (ip !== 'localhost') console.log(qr(urlPathname));
   console.log(`djShow v${version}`);
-  console.log(`Server running at ${urlPathname}`);
+  if (ip !== 'localhost') {
+    console.log(`Server running at ${urlPathname} (localhost:${port})`);
+  } else {
+    console.log(`Server running at ${urlPathname}`);
+  }
   /**
    * Start watch file only file present
    */
@@ -184,7 +187,7 @@ function receiveAndDeliverData(req, res) {
     req.on('data', chunk => postBody += chunk);
     req.on('end', () => {
       postBody = postBody.toString();
-      if (req.headers['content-type'] === 'application/json') {
+      if (req.headers['content-type'].startsWith('application/json')) {
         try {
           postBody = JSON.parse(decodeURI(postBody));
           send(postBody);
@@ -228,64 +231,6 @@ function send(trackDta) {
   users.forEach(user => {
     user.write('data: ' + JSON.stringify(djShow.track) + '\n\n');
   });
-}
-
-/**
- * TRAKTOR PLAYER
- */
-let traktorDecks = {};
-let traktorPrevious;
-async function traktor(req, res) {
-  if (req.method == 'POST') {
-    let postBody = '';
-    req.on('data', chunk => postBody += chunk);
-    req.on('end', () => {
-      try {
-        postBody = JSON.parse(postBody.toString());
-        if (!['A', 'B', 'C', 'D'].includes(postBody.deck)) return;
-        if (postBody.title) {
-          traktorDecks[postBody.deck] = postBody;
-        } else {
-          if (!postBody.propVolume) return;
-          if (((postBody.deck === 'A') || (postBody.deck === 'C')) && (postBody.propXfaderAdjust === 1)) return;
-          if (((postBody.deck === 'B') || (postBody.deck === 'D')) && (postBody.propXfaderAdjust === 0)) return;
-          traktorDecks[postBody.deck].propVolume = postBody.propVolume;
-          traktorDecks[postBody.deck].propXfaderAdjust = postBody.propXfaderAdjust;
-          traktorDecks[postBody.deck].isPlaying = postBody.isPlaying;
-        }
-        const masterDeck = getMasterDeck(traktorDecks);
-        if (isNewTrack(traktorDecks[masterDeck])) send({current: traktorDecks[masterDeck]})//send(traktorDecks[masterDeck]);
-      } catch(e) {}
-    });
-    res.end();
-  }
-  function isNewTrack(trackDetails) {
-    if (!traktorPrevious || traktorPrevious.artist !== trackDetails.artist || traktorPrevious.title !== trackDetails.title) {
-      traktorPrevious = trackDetails;
-      return true;
-    }
-    return false;
-  }
-  function getMasterDeck(deckData) {
-    let masterDeck = null;
-    let highestScore = -Infinity;
-    for (const deck in deckData) {
-      if (deckData.hasOwnProperty(deck)) {
-        const deckDetails = deckData[deck];
-        let score;
-        if (deck === 'A' || deck === 'C') {
-          score = deckDetails.propVolume * (1 - deckDetails.propXfaderAdjust);
-        } else {
-          score = deckDetails.propVolume * deckDetails.propXfaderAdjust;
-        }
-        if (score > highestScore && deckDetails.isPlaying) {
-          highestScore = score;
-          masterDeck = deck;
-        }
-      }
-    }
-    return masterDeck;
-  }
 }
 
 /**
