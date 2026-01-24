@@ -162,12 +162,12 @@ http.createServer(async (req, res) => {
             spawn(`./${file.name}`, [ port ], { cwd: modulesPath });
             console.log('Start script', file.name);
 
-          // } else if (file.isFile() && process.platform === 'darwin' && /^djay$/.test(file.name)) {
-          //   spawn(`./${file.name}`, [ port ], { cwd: modulesPath });
-          //   console.log('Start module', file.name);
-
           } else if (file.isFile() && process.platform === 'win32' && /\.js$/.test(file.name)) {
             spawn('cscript', [ '//nologo', '//e:jscript', file.name, port ], { cwd: modulesPath });
+            console.log('Start script', file.name);
+
+          } else if (file.isFile() && process.platform === 'win32' && /\.vbs$/.test(file.name)) {
+            spawn('cscript', [ '//nologo', file.name, port ], { cwd: modulesPath });
             console.log('Start script', file.name);
           }
         }
