@@ -6,7 +6,7 @@
 
 - **Linux:** Audacious, Clementine, DeadBeef, JRiver, Mixxx, Rhythmbox.
 - **MacOS:** Djay, Embrace, JRiver, Mixxx, Music, Swinsian, Traktor, VirtualDJ, VOX.
-- **Windows:** Aimp, JRiver, iTunes, Foobar2000, MediaMonkey, Mixxx, MusicBee, Traktor, Winamp.
+- **Windows:** Aimp, JRiver, iTunes, Foobar2000, MediaMonkey, Mixxx, MusicBee, Traktor, VirtualDJ, Winamp.
 
 
 ## Скачать пограмму
