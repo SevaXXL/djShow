@@ -1,10 +1,12 @@
 # djShow
 
+If you have any questions, please contact me on Telegram @aleksandr_deinega or by email: adeinega@mail.ru
+
 Программа для отображения названия и исполнителя композиции на различных экранах: монитор, планшет, проектор. Основное предназначение — ненавязчивая помощь танцующим ориентироваться в танго-оркестрах.
 
 Программа написана танго-диджеем для танго-диджеев. Работает с плейерами:
 
-- **Linux:** Audacious, Clementine, DeadBeef, JRiver, Mixxx, Rhythmbox.
+- **Linux:** Audacious, Clementine, DeadBeef, JRiver, Mixxx, Rhythmbox, Strawberry.
 - **MacOS:** Djay, Embrace, JRiver, Mixxx, Music, Swinsian, Traktor, VirtualDJ, VOX.
 - **Windows:** Aimp, JRiver, iTunes, Foobar2000, MediaMonkey, Mixxx, MusicBee, Traktor, VirtualDJ, Winamp.
 
@@ -31,6 +33,4 @@
 
 ## Контакты
 
-Автор программы - Александр Дейнега. Если есть вопросы, пожалуйста, обращайтесь ко мне в Телеграм @aleksandr_deinega или по email: adeinega@mail.ru
-
-Для улучшения dhShow и подключения новых плейеров мне важна обратная связь. Я помогу вам настроить программу и отвечу на вопросы.
+Автор программы - Александр Дейнега. Если есть вопросы, пожалуйста, обращайтесь ко мне в Телеграм @aleksandr_deinega или по email: adeinega@mail.ru Мне важна обратная связь.
