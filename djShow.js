@@ -169,6 +169,10 @@ http.createServer(async (req, res) => {
           } else if (file.isFile() && process.platform === 'win32' && /\.vbs$/.test(file.name)) {
             spawn('cscript', [ '//nologo', file.name, port ], { cwd: modulesPath });
             console.log('Start script', file.name);
+
+          } else if (file.isFile() && process.platform === 'linux' && /\.py$/.test(file.name)) {
+            spawn('python3', [ file.name, port ], { cwd: modulesPath });
+            console.log('Start script', file.name);
           }
         }
       }
